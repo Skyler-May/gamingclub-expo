@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Switch, Text, TouchableOpacity, View } from "react-native";
-// import { useTheme } from "react-native-paper";
+import { Divider, List, Surface, useTheme } from "react-native-paper";
 
 interface ThemeToggleProps {
   isDarkMode: boolean;
@@ -16,27 +16,23 @@ export default function ThemeToggle({
   currentTheme,
   setCurrentTheme,
 }: ThemeToggleProps) {
-  // const theme = useTheme();
+  const theme = useTheme();
   const [showColors, setShowColors] = useState(false);
 
   return (
     <View
       style={{
         padding: 16,
-        borderTopWidth: 1,
-        // borderTopColor: theme.colors.outline,
       }}
     >
       <Text
         style={{
-          // color: theme.colors.onBackground,
+          color: theme.colors.onBackground,
           fontSize: 16,
           fontWeight: "bold",
           marginBottom: 16,
         }}
-      >
-        主题设置
-      </Text>
+      ></Text>
 
       <View
         style={{ flexDirection: "row", alignItems: "center", marginBottom: 16 }}
@@ -44,7 +40,7 @@ export default function ThemeToggle({
         <Ionicons
           name={isDarkMode ? "moon" : "sunny"}
           size={24}
-          // color={theme.colors.onBackground}
+          color={theme.colors.onBackground}
           style={{ flex: 1 }}
         />
         <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
@@ -56,7 +52,7 @@ export default function ThemeToggle({
         <Ionicons
           name="color-palette-outline"
           size={24}
-          // color={theme.colors.onBackground}
+          color={theme.colors.onBackground}
           style={{ flex: 1 }}
         />
         <Switch value={showColors} onValueChange={setShowColors} />
@@ -72,7 +68,7 @@ export default function ThemeToggle({
             gap: 8,
             borderWidth: 1,
             borderRadius: 4,
-            // borderColor: theme.colors.primary,
+            borderColor: theme.colors.primary,
           }}
         >
           {[
@@ -89,10 +85,10 @@ export default function ThemeToggle({
               key={item.id}
               style={{
                 padding: 8,
-                // backgroundColor:
-                //   currentTheme === item.id
-                //     ? theme.colors.primary
-                //     : theme.colors.surface,
+                backgroundColor:
+                  currentTheme === item.id
+                    ? theme.colors.primary
+                    : theme.colors.surface,
                 borderRadius: 4,
                 minWidth: 50,
                 alignItems: "center",
@@ -100,19 +96,30 @@ export default function ThemeToggle({
               onPress={() => setCurrentTheme(item.id)}
             >
               <Text
-                style={
-                  {
-                    // color:
-                    //   currentTheme === item.id
-                    //     ? theme.colors.onPrimary
-                    //     : theme.colors.onSurface,
-                  }
-                }
+                style={{
+                  color:
+                    currentTheme === item.id
+                      ? theme.colors.onPrimary
+                      : theme.colors.onSurface,
+                }}
               >
                 {item.name}
               </Text>
             </TouchableOpacity>
           ))}
+          <Surface>
+            {/* 主题设置 */}
+            <List.Section>
+              <Divider />
+              <List.Subheader>主题设置</List.Subheader>
+              <ThemeToggle
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+                currentTheme={currentTheme}
+                setCurrentTheme={setCurrentTheme}
+              />
+            </List.Section>
+          </Surface>
         </View>
       )}
     </View>
