@@ -1,7 +1,7 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
-import { Switch, Text, TouchableOpacity, View } from "react-native";
-import { Divider, List, Surface, useTheme } from "react-native-paper";
+import { TouchableOpacity, View } from "react-native";
+import { List, Menu, Surface, useTheme } from "react-native-paper";
 
 interface ThemeToggleProps extends React.ComponentProps<typeof View> {
   isDarkMode: boolean;
@@ -18,109 +18,81 @@ export default function ThemeToggle({
   ...props
 }: ThemeToggleProps) {
   const theme = useTheme();
-  const [showColors, setShowColors] = useState(false);
+  const [menuVisible, setMenuVisible] = useState(false);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const themeOptions = [
+    { id: "default", color: "#6200ee", name: "Default" },
+    { id: "pink", color: "#e91e63", name: "Pink" },
+    { id: "blue", color: "#2196f3", name: "Blue" },
+    { id: "green", color: "#4caf50", name: "Green" },
+    { id: "orange", color: "#ff9800", name: "Orange" },
+    { id: "yellow", color: "#ffeb3b", name: "Yellow" },
+    { id: "red", color: "#f44336", name: "Red" },
+    { id: "cyan", color: "#00bcd4", name: "Cyan" },
+  ];
 
   return (
-    <Surface {...props} style={{ padding: 16, margin: 16, borderRadius: 8 }}>
-      <List.Section>
-        <List.Subheader>主题设置</List.Subheader>
-        <Divider />
-
-        {/* Dark/Light Mode Toggle */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: 8,
-          }}
-        >
+    <Surface {...props} style={{ borderRadius: 4 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        {/* Dark/Light Mode Icon */}
+        <TouchableOpacity onPress={toggleDarkMode} style={{ marginRight: 16 }}>
           <Ionicons
             name={isDarkMode ? "moon" : "sunny"}
             size={24}
             color={theme.colors.onBackground}
-            style={{ marginRight: 16 }}
           />
-          <Text style={{ flex: 1, color: theme.colors.onBackground }}>
-            {isDarkMode ? "深色模式" : "浅色模式"}
-          </Text>
-          <Switch value={isDarkMode} onValueChange={setIsDarkMode} />
-        </View>
+        </TouchableOpacity>
 
-        {/* Color Palette Toggle */}
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            marginVertical: 8,
-          }}
+        {/* Color Menu Icon */}
+        <Menu
+          visible={menuVisible}
+          onDismiss={() => setMenuVisible(false)}
+          anchor={
+            <TouchableOpacity onPress={() => setMenuVisible(true)}>
+              <Ionicons
+                name="color-palette-outline"
+                size={24}
+                color={theme.colors.onBackground}
+              />
+            </TouchableOpacity>
+          }
         >
-          <Ionicons
-            name="color-palette-outline"
-            size={24}
-            color={theme.colors.onBackground}
-            style={{ marginRight: 16 }}
-          />
-          <Text style={{ flex: 1, color: theme.colors.onBackground }}>
-            主题颜色
-          </Text>
-          <Switch value={showColors} onValueChange={setShowColors} />
-        </View>
-
-        {/* Color Selection Options */}
-        {showColors && (
-          <View
-            style={{
-              marginTop: 16,
-              justifyContent: "center",
-              alignItems: "center",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              gap: 8,
-              borderWidth: 1,
-              borderRadius: 4,
-              borderColor: theme.colors.primary,
-              padding: 8,
-            }}
-          >
-            {[
-              { id: "default", name: "默认" },
-              { id: "pink", name: "粉色" },
-              { id: "blue", name: "蓝色" },
-              { id: "green", name: "绿色" },
-              { id: "orange", name: "橙色" },
-              { id: "yellow", name: "黄色" },
-              { id: "red", name: "红色" },
-              { id: "cyan", name: "青色" },
-            ].map((item) => (
-              <TouchableOpacity
-                key={item.id}
-                style={{
-                  padding: 8,
-                  backgroundColor:
-                    currentTheme === item.id
-                      ? theme.colors.primary
-                      : theme.colors.surface,
-                  borderRadius: 4,
-                  minWidth: 50,
-                  alignItems: "center",
-                }}
-                onPress={() => setCurrentTheme(item.id)}
-              >
-                <Text
+          {themeOptions.map((item) => (
+            <List.Item
+              key={item.id}
+              onPress={() => {
+                setCurrentTheme(item.id);
+                setMenuVisible(false);
+              }}
+              title="" // 不显示文字
+              left={() => (
+                <View
                   style={{
-                    color:
-                      currentTheme === item.id
-                        ? theme.colors.onPrimary
-                        : theme.colors.onSurface,
+                    width: currentTheme === item.id ? 24 : 20,
+                    height: currentTheme === item.id ? 24 : 20,
+                    borderRadius: 12,
+                    backgroundColor: item.color,
+                    borderWidth: currentTheme === item.id ? 2 : 0,
+                    borderColor: theme.colors.primary,
+                    marginLeft: 8,
                   }}
-                >
-                  {item.name}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        )}
-      </List.Section>
+                />
+              )}
+              style={{ paddingVertical: 4 }}
+            />
+          ))}
+        </Menu>
+      </View>
     </Surface>
   );
 }
