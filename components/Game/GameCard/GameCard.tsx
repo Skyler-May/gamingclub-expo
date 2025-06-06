@@ -24,7 +24,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
 
   const styles = StyleSheet.create({
     container: {
-      width: "48%",
+      width: "47%",
       backgroundColor: theme.colors.elevation.level3,
       borderRadius: 10,
       overflow: "hidden",
