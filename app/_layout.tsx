@@ -77,19 +77,12 @@ function RootLayoutNav({
     <Stack
       screenOptions={{
         headerStyle: { backgroundColor: theme.colors.elevation.level3 },
-        headerRight: () => (
-          <ThemeToggle
-            isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
-            currentTheme={currentTheme}
-            setCurrentTheme={setCurrentTheme}
-          />
-        ),
       }}
     >
       <Stack.Screen
         name="(tabs)"
         options={{
+          title: "返回",
           headerShown: false,
         }}
       />
@@ -98,7 +91,20 @@ function RootLayoutNav({
         options={{ title: "模态（测试）", presentation: "modal" }}
       />
       <Stack.Screen name="hongkong" options={{ title: "香港" }} />
-      <Stack.Screen name="settings" options={{ title: "设置" }} />
+      <Stack.Screen
+        name="settings"
+        options={{
+          title: "设置",
+          headerRight: () => (
+            <ThemeToggle
+              isDarkMode={isDarkMode}
+              setIsDarkMode={setIsDarkMode}
+              currentTheme={currentTheme}
+              setCurrentTheme={setCurrentTheme}
+            />
+          ),
+        }}
+      />
     </Stack>
   );
 }
