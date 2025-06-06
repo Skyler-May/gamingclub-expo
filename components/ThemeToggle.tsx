@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Switch, Text, TouchableOpacity, View } from "react-native";
 import { Divider, List, Surface, useTheme } from "react-native-paper";
 
-interface ThemeToggleProps {
+interface ThemeToggleProps extends React.ComponentProps<typeof View> {
   isDarkMode: boolean;
   setIsDarkMode: (isDarkMode: boolean) => void;
   currentTheme: string;
@@ -15,12 +15,13 @@ export default function ThemeToggle({
   setIsDarkMode,
   currentTheme,
   setCurrentTheme,
+  ...props
 }: ThemeToggleProps) {
   const theme = useTheme();
   const [showColors, setShowColors] = useState(false);
 
   return (
-    <Surface style={{ padding: 16, margin: 16, borderRadius: 8 }}>
+    <Surface {...props} style={{ padding: 16, margin: 16, borderRadius: 8 }}>
       <List.Section>
         <List.Subheader>主题设置</List.Subheader>
         <Divider />

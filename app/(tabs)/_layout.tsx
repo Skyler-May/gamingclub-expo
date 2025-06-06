@@ -8,9 +8,16 @@ function TabBarIcon(props: {
 }) {
   return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
 }
-export default function RootLayout() {
+export default function TabsLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: "",
+        tabBarStyle: {
+          backgroundColor: "#000",
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{

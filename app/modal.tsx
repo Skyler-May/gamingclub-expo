@@ -16,6 +16,7 @@ export default function ModalScreen() {
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
+          backgroundColor: theme.colors.background,
         }}
       >
         <Text>Edit to edit this screen.</Text>
