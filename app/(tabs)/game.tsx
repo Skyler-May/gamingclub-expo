@@ -1,36 +1,145 @@
-import { router } from "expo-router";
-import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { CategoryTabs } from "@/components/Game/CategoryTabs/CategoryTabs";
+import { GameCard } from "@/components/Game/GameCard/GameCard";
+import { CATEGORIES, GAMES } from "@/constants/Games/mockData";
+import { Game, GameCategory } from "@/types/game";
+import React, { useState } from "react";
+import { StyleSheet, useWindowDimensions, View, ViewStyle } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
-export default function GameScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>game</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => router.push("/hongkong")}
-        activeOpacity={0.8}
-      >
-        <Text style={styles.buttonText}>game</Text>
-      </TouchableOpacity>
-    </View>
+// 类型定义
+type ResponsiveContainerProps = {
+  children?: React.ReactNode;
+  style?: ViewStyle;
+};
+
+// 响应式容器组件
+const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
+  children,
+  style,
+}) => <View style={[styles.container, style]}>{children}</View>;
+
+const GameLobbyScreen: React.FC = () => {
+  const { width } = useWindowDimensions();
+
+  // 响应式尺寸计算
+  const CONTAINER_PADDING = 10;
+  const cardWidth = width - CONTAINER_PADDING * 2;
+  const sidePanelWidth = width * 0.25;
+  const mainPanelWidth = width - sidePanelWidth - CONTAINER_PADDING * 3;
+  const [selectedCategory, setSelectedCategory] = useState<
+    GameCategory | "all"
+  >("all");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const filteredGames = GAMES.filter(
+    (game: { category: string; title: string; description: string }) => {
+      const matchesCategory =
+        selectedCategory === "all" || game.category === selectedCategory;
+      const matchesSearch =
+        game.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        game.description.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    }
   );
-}
+
+  return (
+    <ResponsiveContainer>
+      {/* 顶部区域 */}
+      <View style={styles.topSection}>
+        <View
+          style={[
+            styles.card,
+            {
+              width: cardWidth,
+              height: 200,
+            },
+          ]}
+        />
+
+        <View
+          style={[
+            styles.card,
+            {
+              width: cardWidth,
+              height: 50,
+            },
+          ]}
+        />
+      </View>
+
+      {/* 底部区域 */}
+      <View style={styles.bottomSection}>
+        <View
+          style={[
+            styles.card,
+            {
+              width: sidePanelWidth,
+              height: "100%",
+            },
+          ]}
+        >
+          <CategoryTabs
+            categories={CATEGORIES}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory as (category: string) => void}
+          />
+        </View>
+
+        <View
+          style={[
+            styles.card,
+            {
+              width: mainPanelWidth,
+              height: "100%",
+            },
+          ]}
+        >
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View
+              style={{
+                flexDirection: "column",
+                flexWrap: "wrap",
+                gap: 10,
+                // shadowColor: theme.colors.shadow,
+                shadowOffset: { width: 0, height: 2 },
+                shadowOpacity: 0.2,
+                shadowRadius: 4,
+              }}
+            >
+              {filteredGames.map((game: Game) => (
+                <GameCard key={game.id} game={game} />
+              ))}
+            </View>
+          </ScrollView>
+        </View>
+      </View>
+    </ResponsiveContainer>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#F5F5F5",
+  },
+  topSection: {
     alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    backgroundColor: "blue",
     padding: 10,
-    borderRadius: 5,
+    backgroundColor: "#FF3355",
   },
-  buttonText: {
-    color: "white",
-    fontWeight: "bold",
+  bottomSection: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 10,
+    backgroundColor: "#4CAF50",
+  },
+  card: {
+    backgroundColor: "#444444",
+    borderRadius: 10,
+    marginVertical: 4,
   },
 });
+
+export default GameLobbyScreen;

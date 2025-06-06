@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect, useState } from "react";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider, useTheme } from "react-native-paper";
 import "react-native-reanimated";
 
@@ -46,14 +47,16 @@ export default function RootLayout() {
   }
 
   return (
-    <PaperProvider theme={theme}>
-      <RootLayoutNav
-        isDarkMode={isDarkMode}
-        setIsDarkMode={setIsDarkMode}
-        currentTheme={currentTheme}
-        setCurrentTheme={setCurrentTheme}
-      />
-    </PaperProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <PaperProvider theme={theme}>
+        <RootLayoutNav
+          isDarkMode={isDarkMode}
+          setIsDarkMode={setIsDarkMode}
+          currentTheme={currentTheme}
+          setCurrentTheme={setCurrentTheme}
+        />
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
 

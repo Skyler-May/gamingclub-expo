@@ -4,9 +4,9 @@ import { router } from "expo-router";
  * 游戏类型到路由的映射
  */
 export const gameTypeToRouteMap = {
-  hk: "/(tabs)/game/hk",
-  mo: "/(tabs)/game/mo",
-  tw: "/(tabs)/game/tw",
+  hk: "/hongkong",
+  mo: "/mo",
+  tw: "/tw",
 };
 
 /**
