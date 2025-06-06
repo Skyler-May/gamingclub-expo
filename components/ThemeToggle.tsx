@@ -38,6 +38,7 @@ export default function ThemeToggle({
   return (
     <Surface
       {...props}
+      elevation={0}
       style={{
         borderRadius: 4,
         padding: 8,
