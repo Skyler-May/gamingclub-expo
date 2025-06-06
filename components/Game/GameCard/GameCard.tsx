@@ -24,7 +24,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
 
   const styles = StyleSheet.create({
     container: {
-      width: "100%",
+      width: "48%",
       backgroundColor: theme.colors.elevation.level3,
       borderRadius: 10,
       overflow: "hidden",
@@ -70,7 +70,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
       alignItems: "center",
     },
     badgeText: {
-      color: theme.colors.backdrop, // #FFFFFF
+      color: "#FFFFFF", // #FFFFFF
       fontSize: 10,
       fontWeight: "bold",
     },
@@ -117,7 +117,7 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
       borderRadius: 4,
     },
     difficultyText: {
-      color: theme.colors.secondary, // #FFFFFF,
+      color: "#ffffff", // #FFFFFF,
       fontSize: 10,
       fontWeight: "bold",
     },

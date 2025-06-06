@@ -1,10 +1,18 @@
+import FoldCarousel from "@/components/Carousel/Fold/FoldCarousel";
 import { CategoryTabs } from "@/components/Game/CategoryTabs/CategoryTabs";
 import { GameCard } from "@/components/Game/GameCard/GameCard";
 import { CATEGORIES, GAMES } from "@/constants/Games/mockData";
 import { Game, GameCategory } from "@/types/game";
 import React, { useState } from "react";
-import { StyleSheet, useWindowDimensions, View, ViewStyle } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+  ViewStyle,
+} from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import { useTheme } from "react-native-paper";
 
 // 类型定义
 type ResponsiveContainerProps = {
@@ -20,6 +28,7 @@ const ResponsiveContainer: React.FC<ResponsiveContainerProps> = ({
 
 const GameLobbyScreen: React.FC = () => {
   const { width } = useWindowDimensions();
+  const theme = useTheme();
 
   // 响应式尺寸计算
   const CONTAINER_PADDING = 10;
@@ -45,30 +54,49 @@ const GameLobbyScreen: React.FC = () => {
   return (
     <ResponsiveContainer>
       {/* 顶部区域 */}
-      <View style={styles.topSection}>
+
+      <View
+        style={[
+          styles.topSection,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <View
           style={[
             styles.card,
             {
               width: cardWidth,
               height: 200,
+              overflow: "hidden",
             },
           ]}
-        />
-
+        >
+          <FoldCarousel />
+        </View>
         <View
           style={[
             styles.card,
             {
               width: cardWidth,
               height: 50,
+              justifyContent: "center",
+              alignItems: "center",
             },
           ]}
-        />
+        >
+          <Text style={{ fontSize: 16, fontWeight: "bold", color: "orange" }}>
+            欢迎来到游戏大厅，更多经典游戏等你体验！
+          </Text>
+        </View>
       </View>
 
       {/* 底部区域 */}
-      <View style={styles.bottomSection}>
+      <View
+        style={[
+          styles.bottomSection,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <View
           style={[
             styles.card,
@@ -97,7 +125,7 @@ const GameLobbyScreen: React.FC = () => {
           <ScrollView showsVerticalScrollIndicator={false}>
             <View
               style={{
-                flexDirection: "column",
+                flexDirection: "row",
                 flexWrap: "wrap",
                 gap: 10,
                 // shadowColor: theme.colors.shadow,
@@ -125,7 +153,7 @@ const styles = StyleSheet.create({
   topSection: {
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#FF3355",
+    // backgroundColor: "#FF3355",
   },
   bottomSection: {
     flex: 1,
@@ -133,10 +161,10 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 10,
-    backgroundColor: "#4CAF50",
+    // backgroundColor: "#4CAF50",
   },
   card: {
-    backgroundColor: "#444444",
+    // backgroundColor: "#444444",
     borderRadius: 10,
     marginVertical: 4,
   },
