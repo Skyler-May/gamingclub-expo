@@ -6,7 +6,7 @@ export default function Settings() {
   return (
     <View style={styles.container}>
       {/* 法律声明 */}
-      <Link href="/" style={styles.link}>
+      <Link href="/legal" style={styles.link}>
         <View style={styles.option}>
           <Ionicons name="hammer-outline" size={24} color="" />
           <Text style={[styles.optionText]}>法律声明</Text>
@@ -17,7 +17,7 @@ export default function Settings() {
       <View style={[styles.divider]} />
 
       {/* 个人信息 */}
-      <Link href="/" style={styles.link}>
+      <Link href="/personal-info" style={styles.link}>
         <View style={styles.option}>
           <Ionicons name="person-outline" size={24} color="" />
           <Text style={[styles.optionText]}>个人信息</Text>
@@ -28,7 +28,7 @@ export default function Settings() {
       <View style={styles.divider} />
 
       {/* 安全中心 */}
-      <Link href="/" style={styles.link}>
+      <Link href="/security-center" style={styles.link}>
         <View style={styles.option}>
           <Ionicons name="lock-closed-outline" size={24} color="" />
           <Text style={[styles.optionText]}>安全中心</Text>
