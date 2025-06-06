@@ -1,6 +1,7 @@
 import { Ionicons } from "@expo/vector-icons/";
 import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
+import { useTheme } from "react-native-paper";
 
 function TabBarIcon(props: {
   name: React.ComponentProps<typeof Ionicons>["name"];
@@ -8,11 +9,18 @@ function TabBarIcon(props: {
 }) {
   return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
 }
+
 export default function TabsLayout() {
+  const theme = useTheme();
+
   return (
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: "",
+        headerStyle: { backgroundColor: theme.colors.elevation.level3 },
+        tabBarStyle: {
+          backgroundColor: theme.colors.elevation.level3,
+        },
       }}
     >
       <Tabs.Screen

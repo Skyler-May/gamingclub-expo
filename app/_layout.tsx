@@ -1,30 +1,36 @@
+import ThemeToggle from "@/components/ThemeToggle";
+import { getTheme } from "@/utils/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { PaperProvider, useTheme } from "react-native-paper";
 import "react-native-reanimated";
 
-export {
-  // Catch any errors thrown by the Layout component.
-  ErrorBoundary,
-} from "expo-router";
+// 导出错误边界（如果使用 Expo Router 的错误捕获）
+export { ErrorBoundary } from "expo-router";
 
+// Expo Router 设置
 export const unstable_settings = {
-  // Ensure that reloading on `/modal` keeps a back button present.
   initialRouteName: "(tabs)",
 };
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// 禁用 splash 自动隐藏，直到资源加载完成
 SplashScreen.preventAutoHideAsync();
 
+// 定义 RootLayout 组件
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
     ...FontAwesome.font,
   });
 
-  // Expo Router uses Error Boundaries to catch errors in the navigation tree.
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState("default");
+
+  const theme = getTheme(isDarkMode, currentTheme);
+
   useEffect(() => {
     if (error) throw error;
   }, [error]);
@@ -39,13 +45,54 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <PaperProvider theme={theme}>
+      <RootLayoutNav
+        isDarkMode={isDarkMode}
+        setIsDarkMode={setIsDarkMode}
+        currentTheme={currentTheme}
+        setCurrentTheme={setCurrentTheme}
+      />
+    </PaperProvider>
+  );
 }
 
-function RootLayoutNav() {
+// ✅ 添加 props 类型定义
+interface RootLayoutNavProps {
+  isDarkMode: boolean;
+  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
+  currentTheme: string;
+  setCurrentTheme: React.Dispatch<React.SetStateAction<string>>;
+}
+
+// 路由导航组件
+function RootLayoutNav({
+  isDarkMode,
+  setIsDarkMode,
+  currentTheme,
+  setCurrentTheme,
+}: RootLayoutNavProps) {
+  const theme = useTheme();
   return (
-    <Stack>
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+    <Stack
+      screenOptions={{
+        headerStyle: { backgroundColor: theme.colors.elevation.level3 },
+        headerRight: () => (
+          <ThemeToggle
+            isDarkMode={isDarkMode}
+            setIsDarkMode={setIsDarkMode}
+            currentTheme={currentTheme}
+            setCurrentTheme={setCurrentTheme}
+          />
+        ),
+      }}
+    >
+      <Stack.Screen
+        name="(tabs)"
+        options={{
+          headerShown: false,
+        }}
+      />
       <Stack.Screen
         name="modal"
         options={{ title: "模态（测试）", presentation: "modal" }}
