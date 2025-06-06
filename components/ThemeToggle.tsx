@@ -57,14 +57,24 @@ export default function ThemeToggle({
         <Menu
           visible={menuVisible}
           onDismiss={() => setMenuVisible(false)}
+          anchorPosition="bottom"
           anchor={
-            <TouchableOpacity onPress={() => setMenuVisible(true)}>
-              <Ionicons
-                name="color-palette-outline"
-                size={24}
-                color={theme.colors.onBackground}
-              />
-            </TouchableOpacity>
+            <View
+            // style={{
+            //   width: 40,
+            //   height: 40,
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            // }}
+            >
+              <TouchableOpacity onPress={() => setMenuVisible(true)}>
+                <Ionicons
+                  name="color-palette-outline"
+                  size={24}
+                  color={theme.colors.onBackground}
+                />
+              </TouchableOpacity>
+            </View>
           }
         >
           {themeOptions.map((item) => (
@@ -74,7 +84,7 @@ export default function ThemeToggle({
                 setCurrentTheme(item.id);
                 setMenuVisible(false);
               }}
-              title="" // 不显示文字
+              title="" // 不显示标题
               left={() => (
                 <View
                   style={{
