@@ -80,6 +80,7 @@ function RootLayoutNav({
     <Stack
       screenOptions={{
         headerStyle: { backgroundColor: theme.colors.elevation.level3 },
+        headerTintColor: theme.colors.onSurface,
       }}
     >
       <Stack.Screen

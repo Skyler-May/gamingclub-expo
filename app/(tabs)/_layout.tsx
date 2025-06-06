@@ -16,11 +16,14 @@ export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: "",
         headerStyle: { backgroundColor: theme.colors.elevation.level3 },
         tabBarStyle: {
           backgroundColor: theme.colors.elevation.level3,
+          borderTopColor: theme.colors.elevation.level1,
         },
+        tabBarActiveTintColor: theme.colors.primary,
+        tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
+        headerTintColor: theme.colors.onSurface,
       }}
     >
       <Tabs.Screen
@@ -38,7 +41,11 @@ export default function TabsLayout() {
                     name="information-circle"
                     size={25}
                     color={"black"}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    style={{
+                      marginRight: 15,
+                      opacity: pressed ? 0.5 : 1,
+                      color: theme.colors.onSurface,
+                    }}
                   />
                 )}
               </Pressable>
@@ -79,7 +86,11 @@ export default function TabsLayout() {
                     name="settings-outline"
                     size={25}
                     color={"black"}
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
+                    style={{
+                      marginRight: 15,
+                      opacity: pressed ? 0.5 : 1,
+                      color: theme.colors.onSurface,
+                    }}
                   />
                 )}
               </Pressable>
