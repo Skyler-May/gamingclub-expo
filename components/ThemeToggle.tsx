@@ -1,4 +1,4 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
 import { List, Menu, Surface, useTheme } from "react-native-paper";
@@ -36,16 +36,23 @@ export default function ThemeToggle({
   ];
 
   return (
-    <Surface {...props} style={{ borderRadius: 4 }}>
+    <Surface
+      {...props}
+      style={{
+        borderRadius: 4,
+        padding: 8,
+      }}
+    >
       <View
         style={{
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center",
+          gap: 8,
         }}
       >
         {/* Dark/Light Mode Icon */}
-        <TouchableOpacity onPress={toggleDarkMode} style={{ marginRight: 16 }}>
+        <TouchableOpacity onPress={toggleDarkMode}>
           <Ionicons
             name={isDarkMode ? "moon" : "sunny"}
             size={24}
@@ -59,22 +66,13 @@ export default function ThemeToggle({
           onDismiss={() => setMenuVisible(false)}
           anchorPosition="bottom"
           anchor={
-            <View
-            // style={{
-            //   width: 40,
-            //   height: 40,
-            //   justifyContent: "center",
-            //   alignItems: "center",
-            // }}
-            >
-              <TouchableOpacity onPress={() => setMenuVisible(true)}>
-                <Ionicons
-                  name="color-palette-outline"
-                  size={24}
-                  color={theme.colors.onBackground}
-                />
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => setMenuVisible(true)}>
+              <Ionicons
+                name="color-palette-outline"
+                size={24}
+                color={theme.colors.onBackground}
+              />
+            </TouchableOpacity>
           }
         >
           {themeOptions.map((item) => (
@@ -85,16 +83,16 @@ export default function ThemeToggle({
                 setMenuVisible(false);
               }}
               title="" // 不显示标题
-              left={() => (
+              right={() => (
                 <View
                   style={{
-                    width: currentTheme === item.id ? 24 : 20,
-                    height: currentTheme === item.id ? 24 : 20,
+                    width: currentTheme === item.id ? 20 : 20,
+                    height: currentTheme === item.id ? 20 : 20,
                     borderRadius: 12,
                     backgroundColor: item.color,
                     borderWidth: currentTheme === item.id ? 2 : 0,
                     borderColor: theme.colors.primary,
-                    marginLeft: 8,
+                    // marginLeft: 8,
                   }}
                 />
               )}
