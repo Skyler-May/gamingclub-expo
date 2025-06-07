@@ -111,25 +111,25 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
       marginLeft: 4,
       color: theme.colors.secondary, // #666666,
     },
-    difficultyBadge: {
+    regionBadge: {
       paddingHorizontal: 6,
       paddingVertical: 2,
       borderRadius: 4,
     },
-    difficultyText: {
+    regionText: {
       color: "#ffffff", // #FFFFFF,
       fontSize: 10,
       fontWeight: "bold",
     },
   });
 
-  const getDifficultyColor = () => {
-    switch (game.difficulty) {
-      case "easy":
+  const getRegionColor = () => {
+    switch (game.region) {
+      case "hk":
         return "#4CAF50";
-      case "medium":
+      case "mo":
         return "#FFC107";
-      case "hard":
+      case "tw":
         return "#F44336";
       default:
         return "#9E9E9E";
@@ -184,14 +184,9 @@ export const GameCard: React.FC<GameCardProps> = ({ game, style, onPress }) => {
           </View>
 
           <View
-            style={[
-              styles.difficultyBadge,
-              { backgroundColor: getDifficultyColor() },
-            ]}
+            style={[styles.regionBadge, { backgroundColor: getRegionColor() }]}
           >
-            <Text style={styles.difficultyText}>
-              {game.difficulty.toUpperCase()}
-            </Text>
+            <Text style={styles.regionText}>{game.region.toUpperCase()}</Text>
           </View>
         </View>
       </View>
