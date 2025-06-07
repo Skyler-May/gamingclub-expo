@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Menu, Surface, useTheme } from "react-native-paper";
+import { Menu, useTheme } from "react-native-paper";
 
 interface ThemeToggleProps extends React.ComponentProps<typeof View> {
   isDarkMode: boolean;
@@ -36,68 +36,63 @@ export default function ThemeToggle({
   ];
 
   return (
-    <Surface
-      {...props}
-      elevation={0}
+    <View
       style={{
-        borderRadius: 4,
+        ...props,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        backgroundColor: "green",
+        borderRadius: 8,
         padding: 8,
       }}
     >
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: 8,
-        }}
-      >
-        {/* Dark/Light Mode Icon */}
-        <TouchableOpacity onPress={toggleDarkMode}>
-          <Ionicons
-            name={isDarkMode ? "moon" : "sunny"}
-            size={24}
-            color={theme.colors.onBackground}
-          />
-        </TouchableOpacity>
+      {/* Color Menu Icon */}
+      <TouchableOpacity onPress={() => setMenuVisible(true)}>
+        <Ionicons
+          name="color-palette-outline"
+          size={24}
+          color={theme.colors.onBackground}
+        />
+      </TouchableOpacity>
 
-        {/* Color Menu Icon */}
-        <Menu
-          visible={menuVisible}
-          onDismiss={() => setMenuVisible(false)}
-          anchor={
-            <TouchableOpacity onPress={() => setMenuVisible(true)}>
-              <Ionicons
-                name="color-palette-outline"
-                size={24}
-                color={theme.colors.onBackground}
+      {/* Dark/Light Mode Icon */}
+      <TouchableOpacity onPress={toggleDarkMode}>
+        <Ionicons
+          name={isDarkMode ? "moon" : "sunny"}
+          size={24}
+          color={theme.colors.onBackground}
+        />
+      </TouchableOpacity>
+
+      {/* Color Menu Item */}
+      <Menu
+        visible={menuVisible}
+        onDismiss={() => setMenuVisible(false)}
+        anchor={{ x: 400, y: 100 }}
+      >
+        {themeOptions.map((option) => (
+          <Menu.Item
+            key={option.id}
+            onPress={() => {
+              setCurrentTheme(option.id);
+              setMenuVisible(false);
+            }}
+            title={option.name}
+            leadingIcon={() => (
+              <View
+                style={{
+                  width: 12,
+                  height: 12,
+                  borderRadius: 6,
+                  backgroundColor: option.color,
+                }}
               />
-            </TouchableOpacity>
-          }
-        >
-          {themeOptions.map((option) => (
-            <Menu.Item
-              key={option.id}
-              onPress={() => {
-                setCurrentTheme(option.id);
-                setMenuVisible(false);
-              }}
-              title={option.name}
-              leadingIcon={() => (
-                <View
-                  style={{
-                    width: 12,
-                    height: 12,
-                    borderRadius: 6,
-                    backgroundColor: option.color,
-                  }}
-                />
-              )}
-              trailingIcon={currentTheme === option.id ? "check" : undefined}
-            />
-          ))}
-        </Menu>
-      </View>
-    </Surface>
+            )}
+            trailingIcon={currentTheme === option.id ? "check" : undefined}
+          />
+        ))}
+      </Menu>
+    </View>
   );
 }

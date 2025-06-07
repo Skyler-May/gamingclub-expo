@@ -1,11 +1,12 @@
-import ThemeToggle from "@/components/ThemeToggle";
 import { getTheme } from "@/utils/Themed";
+import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
+import { TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider, useTheme } from "react-native-paper";
 import "react-native-reanimated";
@@ -50,7 +51,7 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <StatusBar
-        backgroundColor={theme.colors.elevation.level3}
+        // backgroundColor={theme.colors.elevation.level3}
         style={theme.colors.statusBar.style === "dark" ? "dark" : "light"}
       />
       <PaperProvider theme={theme}>
@@ -80,6 +81,9 @@ function RootLayoutNav({
   currentTheme,
   setCurrentTheme,
 }: RootLayoutNavProps) {
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
   const theme = useTheme();
   return (
     <Stack
@@ -105,12 +109,29 @@ function RootLayoutNav({
         options={{
           title: "设置",
           headerRight: () => (
-            <ThemeToggle
-              isDarkMode={isDarkMode}
-              setIsDarkMode={setIsDarkMode}
-              currentTheme={currentTheme}
-              setCurrentTheme={setCurrentTheme}
-            />
+            <View
+              style={
+                {
+                  // flexDirection: "row",
+                  // // backgroundColor: "red",
+                  // left: 15,
+                }
+              }
+            >
+              {/* <ThemeToggle
+                isDarkMode={isDarkMode}
+                setIsDarkMode={setIsDarkMode}
+                currentTheme={currentTheme}
+                setCurrentTheme={setCurrentTheme}
+              /> */}
+              <TouchableOpacity onPress={toggleDarkMode}>
+                <Ionicons
+                  name={isDarkMode ? "moon" : "sunny"}
+                  size={24}
+                  color={theme.colors.onBackground}
+                />
+              </TouchableOpacity>
+            </View>
           ),
         }}
       />
