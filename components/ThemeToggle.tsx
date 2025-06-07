@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { List, Menu, Surface, useTheme } from "react-native-paper";
+import { Menu, Surface, useTheme } from "react-native-paper";
 
 interface ThemeToggleProps extends React.ComponentProps<typeof View> {
   isDarkMode: boolean;
@@ -65,7 +65,6 @@ export default function ThemeToggle({
         <Menu
           visible={menuVisible}
           onDismiss={() => setMenuVisible(false)}
-          anchorPosition="bottom"
           anchor={
             <TouchableOpacity onPress={() => setMenuVisible(true)}>
               <Ionicons
@@ -76,28 +75,25 @@ export default function ThemeToggle({
             </TouchableOpacity>
           }
         >
-          {themeOptions.map((item) => (
-            <List.Item
-              key={item.id}
+          {themeOptions.map((option) => (
+            <Menu.Item
+              key={option.id}
               onPress={() => {
-                setCurrentTheme(item.id);
+                setCurrentTheme(option.id);
                 setMenuVisible(false);
               }}
-              title="" // 不显示标题
-              right={() => (
+              title={option.name}
+              leadingIcon={() => (
                 <View
                   style={{
-                    width: currentTheme === item.id ? 20 : 20,
-                    height: currentTheme === item.id ? 20 : 20,
-                    borderRadius: 12,
-                    backgroundColor: item.color,
-                    borderWidth: currentTheme === item.id ? 2 : 0,
-                    borderColor: theme.colors.primary,
-                    // marginLeft: 8,
+                    width: 12,
+                    height: 12,
+                    borderRadius: 6,
+                    backgroundColor: option.color,
                   }}
                 />
               )}
-              style={{ paddingVertical: 4 }}
+              trailingIcon={currentTheme === option.id ? "check" : undefined}
             />
           ))}
         </Menu>
