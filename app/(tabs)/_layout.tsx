@@ -3,15 +3,13 @@ import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
 import { useTheme } from "react-native-paper";
 
-function TabBarIcon({
-  name,
-  color = "black",
-  size = 24,
-}: {
+type TabBarIconProps = {
   name: React.ComponentProps<typeof Ionicons>["name"];
   color?: string;
   size?: number;
-}) {
+};
+
+function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
   return (
     <Ionicons
       name={name}
