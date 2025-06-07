@@ -106,15 +106,7 @@ function RootLayoutNav({
         options={{
           title: "设置",
           headerRight: () => (
-            <View
-              style={
-                {
-                  // flexDirection: "row",
-                  // // backgroundColor: "red",
-                  // marginRight: 16,
-                }
-              }
-            >
+            <View>
               <ThemeToggle
                 isDarkMode={isDarkMode}
                 setIsDarkMode={setIsDarkMode}
