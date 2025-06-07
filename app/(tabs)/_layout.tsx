@@ -3,11 +3,23 @@ import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
 import { useTheme } from "react-native-paper";
 
-function TabBarIcon(props: {
+function TabBarIcon({
+  name,
+  color = "black",
+  size = 24,
+}: {
   name: React.ComponentProps<typeof Ionicons>["name"];
-  color: string;
+  color?: string;
+  size?: number;
 }) {
-  return <Ionicons size={28} style={{ marginBottom: -3 }} {...props} />;
+  return (
+    <Ionicons
+      name={name}
+      color={color}
+      size={size}
+      style={{ marginBottom: -3 }}
+    />
+  );
 }
 
 export default function TabsLayout() {
@@ -30,8 +42,12 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: "首页",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="home-outline" color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon
+              name={focused ? "home" : "home-outline"}
+              color={color}
+              size={size}
+            />
           ),
           headerRight: () => (
             <Link href="/modal" asChild>
@@ -57,8 +73,12 @@ export default function TabsLayout() {
         name="game"
         options={{
           title: "大厅",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="game-controller-outline" color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon
+              name={focused ? "game-controller" : "game-controller-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -66,8 +86,12 @@ export default function TabsLayout() {
         name="wallet"
         options={{
           title: "Wallet",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="wallet-outline" color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon
+              name={focused ? "wallet" : "wallet-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -75,8 +99,12 @@ export default function TabsLayout() {
         name="profile"
         options={{
           title: "Profile",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="person-outline" color={color} />
+          tabBarIcon: ({ color, size, focused }) => (
+            <TabBarIcon
+              name={focused ? "person" : "person-outline"}
+              size={size}
+              color={color}
+            />
           ),
           headerRight: () => (
             <Link href="/settings" asChild>
