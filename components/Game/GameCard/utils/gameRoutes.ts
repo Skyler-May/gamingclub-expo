@@ -5,8 +5,9 @@ import { router } from "expo-router";
  */
 export const gameTypeToRouteMap = {
   hk: "/hongkong",
-  newmo: "/newmo",
-  tw: "/tw",
+  mo: "/macau",
+  newmo: "/newmacau",
+  tw: "/taiwan",
 };
 
 /**
