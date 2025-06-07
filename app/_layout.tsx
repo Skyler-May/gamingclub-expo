@@ -118,7 +118,23 @@ function RootLayoutNav({
         }}
       />
       <Stack.Screen
-        name="newmo"
+        name="macau"
+        options={{
+          title: "澳门",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                name="help-circle-outline"
+                size={24}
+                color="black"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="newmacau"
         options={{
           title: "新澳门",
           headerRight: () => (
@@ -134,7 +150,7 @@ function RootLayoutNav({
         }}
       />
       <Stack.Screen
-        name="tw"
+        name="taiwan"
         options={{
           title: "台湾",
           headerRight: () => (
