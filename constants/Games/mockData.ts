@@ -16,8 +16,8 @@ export const GAMES: Game[] = [
   },
   {
     id: "2",
-    title: "澳门",
-    type: "mo",
+    title: "新澳门",
+    type: "newmo",
     description: "实时战略游戏，建立你的军队征服敌人",
     thumbnail: "https://picsum.photos/200/300/?=2",
     rating: 4.5,

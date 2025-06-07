@@ -1,12 +1,13 @@
 import ThemeToggle from "@/components/ThemeToggle";
 import { getTheme } from "@/utils/Themed";
+import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PaperProvider, useTheme } from "react-native-paper";
 import "react-native-reanimated";
@@ -92,7 +93,7 @@ function RootLayoutNav({
       <Stack.Screen
         name="(tabs)"
         options={{
-          title: "返回",
+          title: "首页",
           headerShown: false,
         }}
       />
@@ -100,7 +101,54 @@ function RootLayoutNav({
         name="modal"
         options={{ title: "模态（测试）", presentation: "modal" }}
       />
-      <Stack.Screen name="hongkong" options={{ title: "香港" }} />
+      <Stack.Screen
+        name="hongkong"
+        options={{
+          title: "香港",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                name="help-circle-outline"
+                size={24}
+                color="black"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="newmo"
+        options={{
+          title: "新澳门",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                name="help-circle-outline"
+                size={24}
+                color="black"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="tw"
+        options={{
+          title: "台湾",
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                name="help-circle-outline"
+                size={24}
+                color="black"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+      />
       <Stack.Screen
         name="settings"
         options={{

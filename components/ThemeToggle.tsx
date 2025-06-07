@@ -58,7 +58,7 @@ export default function ThemeToggle({
         {/* Dark/Light Mode Icon */}
         <TouchableOpacity onPress={toggleDarkMode}>
           <Ionicons
-            name={isDarkMode ? "moon" : "sunny"}
+            name={isDarkMode ? "moon-outline" : "sunny-outline"}
             size={24}
             color={theme.colors.onBackground}
           />

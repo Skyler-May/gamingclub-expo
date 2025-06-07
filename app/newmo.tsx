@@ -6,7 +6,7 @@ import SubPageContent from "@/components/Modal/SubPageContent";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
-export default function MacauScreen() {
+export default function NewMacauScreen() {
   const theme = useTheme();
   const [currentPage, setCurrentPage] = useState<number>(1); // 设置默认页面为第一个页面
   // 处理页面选择

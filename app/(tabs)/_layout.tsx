@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons/";
 import { Link, Tabs } from "expo-router";
-import { Pressable } from "react-native";
+import { Pressable, TouchableOpacity } from "react-native";
 import { useTheme } from "react-native-paper";
 
 type TabBarIconProps = {
@@ -77,6 +77,16 @@ export default function TabsLayout() {
               size={size}
               color={color}
             />
+          ),
+          headerRight: () => (
+            <TouchableOpacity>
+              <Ionicons
+                name="search-outline"
+                size={24}
+                color="black"
+                style={{ marginRight: 15 }}
+              />
+            </TouchableOpacity>
           ),
         }}
       />
