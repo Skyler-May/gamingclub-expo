@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Menu, useTheme } from "react-native-paper";
+import { Menu, Surface, useTheme } from "react-native-paper";
 
 interface ThemeToggleProps extends React.ComponentProps<typeof View> {
   isDarkMode: boolean;
@@ -36,34 +36,34 @@ export default function ThemeToggle({
   ];
 
   return (
-    <View
-      style={{
-        ...props,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        backgroundColor: "green",
-        borderRadius: 8,
-        padding: 8,
-      }}
-    >
-      {/* Color Menu Icon */}
-      <TouchableOpacity onPress={() => setMenuVisible(true)}>
-        <Ionicons
-          name="color-palette-outline"
-          size={24}
-          color={theme.colors.onBackground}
-        />
-      </TouchableOpacity>
+    <Surface elevation={0}>
+      <View
+        style={{
+          ...props,
+          flexDirection: "row",
+          borderRadius: 8,
+          padding: 8,
+          gap: 16,
+        }}
+      >
+        {/* Color Menu Icon */}
+        <TouchableOpacity onPress={() => setMenuVisible(true)}>
+          <Ionicons
+            name="color-palette-outline"
+            size={24}
+            color={theme.colors.onBackground}
+          />
+        </TouchableOpacity>
 
-      {/* Dark/Light Mode Icon */}
-      <TouchableOpacity onPress={toggleDarkMode}>
-        <Ionicons
-          name={isDarkMode ? "moon" : "sunny"}
-          size={24}
-          color={theme.colors.onBackground}
-        />
-      </TouchableOpacity>
+        {/* Dark/Light Mode Icon */}
+        <TouchableOpacity onPress={toggleDarkMode}>
+          <Ionicons
+            name={isDarkMode ? "moon" : "sunny"}
+            size={24}
+            color={theme.colors.onBackground}
+          />
+        </TouchableOpacity>
+      </View>
 
       {/* Color Menu Item */}
       <Menu
@@ -93,6 +93,6 @@ export default function ThemeToggle({
           />
         ))}
       </Menu>
-    </View>
+    </Surface>
   );
 }
