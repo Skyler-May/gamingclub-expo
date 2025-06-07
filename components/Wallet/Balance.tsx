@@ -19,7 +19,6 @@ export default function Balance({
 
   const styles = StyleSheet.create({
     container: {
-      marginTop: 16,
       padding: 16,
       borderRadius: 12,
       backgroundColor: theme.colors.primary,
@@ -28,32 +27,20 @@ export default function Balance({
       shadowOffset: { width: 2, height: 4 },
       shadowOpacity: 0.2,
       shadowRadius: 4,
-      elevation: 8,
+      elevation: 5,
     },
     balanceContainer: {
       marginBottom: 24,
-      shadowColor: theme.colors.shadow,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
     },
     balanceLabel: {
       fontSize: 14,
       color: theme.colors.surface,
       marginBottom: 8,
-      shadowColor: theme.colors.shadow,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
     },
     balanceAmount: {
       fontSize: 26,
       fontWeight: "bold",
       color: theme.colors.surface,
-      shadowColor: theme.colors.shadow,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
     },
     actionsContainer: {
       flexDirection: "row",
@@ -61,10 +48,6 @@ export default function Balance({
     },
     actionButton: {
       alignItems: "center",
-      shadowColor: theme.colors.shadow,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
     },
     actionIcon: {
       width: 40,
@@ -78,14 +61,11 @@ export default function Balance({
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.2,
       shadowRadius: 4,
+      elevation: 5,
     },
     actionText: {
       fontSize: 12,
       color: theme.colors.surface,
-      shadowColor: theme.colors.shadow,
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.2,
-      shadowRadius: 4,
     },
   });
 
