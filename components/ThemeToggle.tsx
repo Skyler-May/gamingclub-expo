@@ -82,12 +82,21 @@ export default function ThemeToggle({
             leadingIcon={() => (
               <View
                 style={{
-                  width: 12,
-                  height: 12,
-                  borderRadius: 6,
-                  backgroundColor: option.color,
+                  justifyContent: "center", // 垂直居中
+                  alignItems: "center", // 水平居中（可选）
+                  width: 24, // 让内容不挤在一起
+                  height: 24, // 匹配 icon 的期望尺寸
                 }}
-              />
+              >
+                <View
+                  style={{
+                    width: 12,
+                    height: 12,
+                    borderRadius: 6,
+                    backgroundColor: option.color,
+                  }}
+                />
+              </View>
             )}
             trailingIcon={currentTheme === option.id ? "check" : undefined}
           />
