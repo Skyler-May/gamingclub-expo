@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from "react-native";
+import { useTheme } from "react-native-paper";
 import CustomModal from "./MultiPageModal";
 import { modalPages, PageData } from "./pageData";
 
@@ -32,6 +33,7 @@ const OpenModal: React.FC<OpenModalProps> = ({
   const [visible, setVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState<number | null>(null);
   const [currentButtonTitle, setCurrentButtonTitle] = useState(buttonTitle);
+  const theme = useTheme();
 
   // 根据当前页面ID更新按钮标题
   useEffect(() => {
@@ -71,6 +73,22 @@ const OpenModal: React.FC<OpenModalProps> = ({
     onPress: () => handlePageSelect(page.id),
   }));
 
+  const styles = StyleSheet.create({
+    button: {
+      borderWidth: 1,
+      borderColor: theme.colors.primary, // #2196F3
+      padding: 10,
+      borderRadius: 5,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    buttonText: {
+      color: theme.colors.primary, // #2196F3
+      fontSize: 14,
+      textAlign: "center",
+    },
+  });
+
   return (
     <>
       <TouchableOpacity
@@ -93,20 +111,5 @@ const OpenModal: React.FC<OpenModalProps> = ({
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    backgroundColor: "#2196F3",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 14,
-    textAlign: "center",
-  },
-});
 
 export default OpenModal;
