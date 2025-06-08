@@ -7,23 +7,28 @@ import {
   View,
 } from "react-native";
 import { Badge } from "react-native-paper";
+import { QuickButton } from "./QuickButton";
 
 export default function SubmitButton() {
   return (
     <View style={styles.container}>
-      <View style={styles.addDataButtonContainer}>
+      <View style={styles.topContainer}>
+        <View style={{ width: "60%" }}>
+          <QuickButton />
+        </View>
+        <View style={{ width: "38%" }}>{/* <QuickButton /> */}</View>
+      </View>
+      <View style={styles.bottomContainer}>
         <TouchableOpacity>
           <AntDesign name="delete" size={24} color="tomato" />
-          {/* <Text style={{ fontSize: 12, color: "gray" }}>清空</Text> */}
+          <Text style={{ fontSize: 12, color: "gray" }}>清空</Text>
         </TouchableOpacity>
-
         <TouchableOpacity>
-          <AntDesign name="shake" size={24} color="tomato" />
-          {/* <Text style={{ fontSize: 12, color: "gray" }}>随机</Text> */}
+          <AntDesign name="shake" size={24} color="gray" />
+          <Text style={{ fontSize: 12, color: "gray" }}>随机</Text>
         </TouchableOpacity>
-
         <TouchableOpacity>
-          <AntDesign name="shoppingcart" size={24} color="tomato" />
+          <AntDesign name="shoppingcart" size={24} color="blue" />
           <Badge
             visible={true}
             size={16}
@@ -31,17 +36,16 @@ export default function SubmitButton() {
           >
             {"12"}
           </Badge>
-          {/* <Text style={{ fontSize: 12, color: "gray" }}>数量</Text> */}
+          <Text style={{ fontSize: 12, color: "gray" }}>数量</Text>
         </TouchableOpacity>
-
         <TextInput
           style={styles.input}
           placeholder="输入金额"
           placeholderTextColor="gray"
           keyboardType="numeric"
         />
-        <TouchableOpacity style={styles.addDataButton}>
-          <Text style={styles.addDataButtonText}>添加</Text>
+        <TouchableOpacity style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>添加</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -50,26 +54,32 @@ export default function SubmitButton() {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    bottom: 0,
-    left: 0,
-    right: 0,
-    // backgroundColor: "red",
-    justifyContent: "center",
+    //backgroundColor: "#663399", // 紫色背景颜色 #663399
+    height: 100,
     width: "100%",
+    justifyContent: "center",
     borderTopWidth: 1,
     borderColor: "#ddd",
+    // padding: 10,
+    gap: 10,
   },
-
-  addDataButtonContainer: {
+  topContainer: {
+    gap: 8,
     flexDirection: "row",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     alignItems: "center",
     borderRadius: 5,
     borderBlockColor: "black",
+    //   backgroundColor: "red", // 红色背景颜色
   },
-
-  addDataButton: {
+  bottomContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
+    //   backgroundColor: "yellow", // 黄色背景颜色
+  },
+  submitButton: {
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
@@ -79,10 +89,10 @@ const styles = StyleSheet.create({
     fontSize: 5,
     backgroundColor: "#007AFF",
   },
-  addDataButtonText: {
+  submitButtonText: {
     textAlign: "center",
     color: "white",
-    width: 60,
+    width: 100,
   },
   input: {
     borderWidth: 1,

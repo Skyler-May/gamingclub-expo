@@ -1,4 +1,4 @@
-import { AddButton } from "@/components/Buttons/AddButton";
+import { QuickButton } from "@/components/Buttons/QuickButton";
 import SubmitButton from "@/components/Buttons/SubmitButton";
 import React from "react";
 import { StyleSheet, View } from "react-native";
@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 export default function HomeScreen() {
   return (
     <View style={styles.container}>
-      <AddButton />
+      <QuickButton />
       <SubmitButton />
     </View>
   );

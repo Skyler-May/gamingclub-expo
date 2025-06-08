@@ -11,47 +11,47 @@ import {
 } from "react-native";
 
 // ✅ 修改函数名为大写开头以符合 React 组件命名规范
-export function AddButton() {
-  const [selectedAmounts, setselectedAmounts] = useState("");
-  const [defaultAmounts, setDefaultAmounts] = useState<number[]>([
+export function QuickButton() {
+  const [selectedValues, setselectedValues] = useState("");
+  const [defaultValues, setDefaultValues] = useState<number[]>([
     5, 10, 20, 50, 100,
   ]);
-  const [isEditingDefaultAmount, setIsEditingDefaultAmount] =
+  const [isEditingDefaultValue, setIsEditingDefaultValue] =
     useState<boolean>(false);
-  const [editedDefaultAmounts, setEditedDefaultAmounts] = useState<string[]>(
-    defaultAmounts.map(String)
+  const [editedDefaultValues, setEditedDefaultValues] = useState<string[]>(
+    defaultValues.map(String)
   );
 
   // 处理编辑默认金额按钮点击事件的函数
-  const handleEditDefaultAmountButtonPress = () => {
-    setIsEditingDefaultAmount(true);
+  const handleEditDefaultValueButtonPress = () => {
+    setIsEditingDefaultValue(true);
   };
 
   // 处理输入框聚焦事件的函数
   const handleInputFocus = (index: number) => {
-    const newEditedAmounts = [...editedDefaultAmounts];
-    newEditedAmounts[index] = "";
-    setEditedDefaultAmounts(newEditedAmounts);
+    const newEditedValues = [...editedDefaultValues];
+    newEditedValues[index] = "";
+    setEditedDefaultValues(newEditedValues);
   };
 
   // 处理输入框失焦事件的函数
   const handleInputBlur = (index: number) => {
-    const editedValue = editedDefaultAmounts[index];
+    const editedValue = editedDefaultValues[index];
     if (editedValue.trim() === "") {
-      const newEditedAmounts = [...editedDefaultAmounts];
-      newEditedAmounts[index] = defaultAmounts[index].toString();
-      setEditedDefaultAmounts(newEditedAmounts);
+      const newEditedValues = [...editedDefaultValues];
+      newEditedValues[index] = defaultValues[index].toString();
+      setEditedDefaultValues(newEditedValues);
     }
   };
 
   // 处理快捷金额按钮按下后添加到输入框
-  const handleQuickAmountButtonPress = (number: number) => {
-    setselectedAmounts(Math.floor(number).toString());
+  const handleQuickValueButtonPress = (number: number) => {
+    setselectedValues(Math.floor(number).toString());
   };
 
   // 处理模态框保存按钮逻辑
   const handleModleSaveButtonPress = () => {
-    const hasEmptyOrZero = editedDefaultAmounts.some(
+    const hasEmptyOrZero = editedDefaultValues.some(
       (value) => value.trim() === "" || parseInt(value) === 0
     );
 
@@ -60,8 +60,8 @@ export function AddButton() {
       return;
     }
 
-    const isUniqueKey = editedDefaultAmounts.every((value, index) => {
-      return editedDefaultAmounts.indexOf(value) === index;
+    const isUniqueKey = editedDefaultValues.every((value, index) => {
+      return editedDefaultValues.indexOf(value) === index;
     });
 
     if (!isUniqueKey) {
@@ -69,42 +69,42 @@ export function AddButton() {
       return;
     }
 
-    setDefaultAmounts(editedDefaultAmounts.map(parseFloat));
-    setIsEditingDefaultAmount(false);
+    setDefaultValues(editedDefaultValues.map(parseFloat));
+    setIsEditingDefaultValue(false);
   };
 
   return (
     <View style={styles.container}>
-      {defaultAmounts.map((number) => (
+      {defaultValues.map((number) => (
         <TouchableOpacity
           key={number}
           style={[
             styles.button,
-            selectedAmounts === number.toString() && styles.selectedButton,
+            selectedValues === number.toString() && styles.selectedButton,
           ]}
-          onPress={() => handleQuickAmountButtonPress(number)}
+          onPress={() => handleQuickValueButtonPress(number)}
         >
           <Text style={styles.buttonText}>{number}</Text>
         </TouchableOpacity>
       ))}
       <TouchableOpacity
-        onPress={handleEditDefaultAmountButtonPress}
+        onPress={handleEditDefaultValueButtonPress}
         style={styles.iconButton}
       >
-        <AntDesign name="edit" size={20} color="gray" />
+        <AntDesign name="edit" size={20} color="blue" />
         {/* <Text style={{ fontSize: 12, color: "gray" }}>快捷</Text> */}
       </TouchableOpacity>
 
       {/* Modal content  */}
       <Modal
-        visible={isEditingDefaultAmount}
+        visible={isEditingDefaultValue}
         animationType="slide"
         transparent={true}
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <TouchableOpacity
-              onPress={() => setIsEditingDefaultAmount(false)}
+              onPress={() => setIsEditingDefaultValue(false)}
               style={styles.modalCloseButton}
             >
               <AntDesign name="closecircleo" size={24} color="red" />
@@ -113,15 +113,15 @@ export function AddButton() {
               编辑快捷金额：
               <Text style={{ color: "red", fontSize: 12 }}>不能设置相同值</Text>
             </Text>
-            {defaultAmounts.map((amount, index) => (
-              <View key={amount.toString()}>
+            {defaultValues.map((Value, index) => (
+              <View key={Value.toString()}>
                 <Text style={styles.modalLabel}>{`金额 ${index + 1}:`}</Text>
                 <TextInput
-                  value={editedDefaultAmounts[index]}
+                  value={editedDefaultValues[index]}
                   onChangeText={(text) => {
-                    const newEditedAmounts = [...editedDefaultAmounts];
-                    newEditedAmounts[index] = text;
-                    setEditedDefaultAmounts(newEditedAmounts);
+                    const newEditedValues = [...editedDefaultValues];
+                    newEditedValues[index] = text;
+                    setEditedDefaultValues(newEditedValues);
                   }}
                   keyboardType="numeric"
                   style={styles.modalInput}
@@ -148,15 +148,22 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     flexWrap: "wrap",
-    gap: 8,
+    justifyContent: "space-between",
+    alignItems: "center",
+    // backgroundColor: "#FFFFE0", // 设置背景颜色为浅黄色
     // padding: 10,
-    backgroundColor: "#FFFFE0", // 浅黄色 #FFFFE0
   },
   button: {
-    // padding: 10,
+    // flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: 30,
+    height: 30,
+    marginBottom: 10,
+    backgroundColor: "#f2f2f2",
     borderWidth: 1,
     borderColor: "#ccc",
-    borderRadius: 5,
+    borderRadius: 15,
   },
   selectedButton: {
     backgroundColor: "#007AFF",
@@ -166,10 +173,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   iconButton: {
-    //backgroundColor: "#FFD700", // 黄色
     flexDirection: "row",
     alignItems: "center",
   },
+
   // Modal
   modalContainer: {
     flex: 1,
