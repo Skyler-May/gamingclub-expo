@@ -10,7 +10,6 @@ interface NumberAnimalSelectorProps {
   initialSelectedAnimals?: string[]; // 初始选中的动物列表
   maxSelectCount?: number; // 最大可选数量
   onSelectionChange?: (numbers: number[], animals: string[]) => void; // 选择变化时的回调函数
-  buttonDescription?: string; // 数字按钮下方的描述文本
 }
 
 export default function NumberAnimalSelector({
@@ -18,7 +17,6 @@ export default function NumberAnimalSelector({
   initialSelectedAnimals = [],
   maxSelectCount,
   onSelectionChange,
-  buttonDescription = "动物值", // 默认值为"动物值"
 }: NumberAnimalSelectorProps) {
   // 动物面板显示状态
   const [showAnimals, setShowAnimals] = useState(false);
@@ -348,7 +346,6 @@ export default function NumberAnimalSelector({
         onSelectNumber={handleSelectNumber}
         onSelectAll={handleSelectAll}
         onClear={handleClear}
-        buttonDescription={buttonDescription}
       />
     </View>
   );

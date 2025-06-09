@@ -17,7 +17,6 @@ const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
           {/* <Text style={styles.pageTitle}>A 页面内容</Text>
           <Text>这是 A 页面的详细内容</Text> */}
           <NumberAnimalSelector
-            buttonDescription="动物值"
             onSelectionChange={(numbers, animals) => {
               console.log("选中的数字:", numbers);
               console.log("选中的动物:", animals);
