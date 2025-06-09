@@ -1,9 +1,4 @@
-// 定义页面按钮数据接口
-export interface PageData {
-  id: number;
-  title: string;
-  onPress?: () => void;
-}
+import { PageData } from "../types/page"; // 导入 PageData 数据类型
 
 // 导出页面按钮数据
 export const modalPages: PageData[] = [

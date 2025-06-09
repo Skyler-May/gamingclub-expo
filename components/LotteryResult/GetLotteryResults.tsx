@@ -6,7 +6,7 @@ import {
   Text,
   View,
 } from "react-native";
-import { LotteryResult, LotteryResultDisplayOptions } from "./types";
+import { LotteryResult, LotteryResultDisplayOptions } from "./types/apiTypes";
 
 const GetLotteryResults: React.FC<LotteryResultDisplayOptions> = ({
   apiUrl,
