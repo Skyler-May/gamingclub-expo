@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import { AnimalButtonsGroup } from "./AnimalButtonsPanel";
-import { BigSmallOddEvenButtonsGroup } from "./BigSmallOddEvenPanel";
-import { ButtonsGroup, animalAgeMap } from "./ButtonsGroup";
+import AnimalButtonsGroup from "./AnimalButtonsPanel";
+import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
+import ButtonsGroup, { animalAgeMap } from "./ButtonsGroup";
 
 interface NumberAnimalSelectorProps {
   // 组件必要属性

@@ -26,7 +26,7 @@ interface ButtonsGroupProps {
   buttonDescription?: string;
 }
 
-export function ButtonsGroup({
+export default function ButtonsGroup({
   allSelected,
   selectedButtons,
   onSelectNumber,
