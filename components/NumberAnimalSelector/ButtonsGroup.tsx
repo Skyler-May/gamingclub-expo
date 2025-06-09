@@ -2,7 +2,7 @@ import useButtonGroupLayout from "@/components/NumberAnimalSelector/hooks/useBut
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,
-} from "@/components/NumberAnimalSelector/utils/buttonStyleUtils";
+} from "@/components/NumberAnimalSelector/utils/buttonGroupStyles";
 import {
   ScrollView,
   StyleSheet,
