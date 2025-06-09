@@ -17,7 +17,7 @@ interface BigSmallOddEvenButtonsGroupProps {
   evenSelected: boolean;
 }
 
-export default function BigSmallOddEvenButtonsGroup({
+export function BigSmallOddEvenButtonsGroup({
   showAnimals,
   toggleAnimalsPanel,
   allSelected,

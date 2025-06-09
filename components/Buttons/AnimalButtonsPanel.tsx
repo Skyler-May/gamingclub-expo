@@ -10,7 +10,7 @@ interface AnimalButtonsGroupProps {
   onSelectAnimal: (animal: string) => void;
 }
 
-export default function AnimalButtonsGroup({
+export function AnimalButtonsGroup({
   selectedAnimals,
   onSelectAnimal,
 }: AnimalButtonsGroupProps) {
