@@ -11,11 +11,11 @@ import {
   View,
 } from "react-native";
 
-interface NumberButtonsProps {
+interface ButtonsGroupProps {
   // 全选状态
   allSelected: boolean;
   // 选中的数字列表
-  selectedNumbers: number[];
+  selectedButtons: number[];
   // 选择数字的回调函数
   onSelectNumber: (number: number) => void;
   // 全选的回调函数
@@ -26,24 +26,24 @@ interface NumberButtonsProps {
   buttonDescription?: string;
 }
 
-export default function NumberButtons({
+export default function ButtonsGroup({
   allSelected,
-  selectedNumbers,
+  selectedButtons,
   onSelectNumber,
   onSelectAll,
   onClear,
   buttonDescription,
-}: NumberButtonsProps) {
+}: ButtonsGroupProps) {
   // 使用自定义Hook处理网格布局
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout();
 
   // 渲染数字按钮
-  const renderNumberButtons = () => {
+  const renderButtonsGroup = () => {
     const buttons = [];
     for (let i = 1; i <= 49; i++) {
       // 数值小于两位的前面加0
       const displayNumber = i < 10 ? `0${i}` : `${i}`;
-      const isSelected = selectedNumbers.includes(i);
+      const isSelected = selectedButtons.includes(i);
 
       buttons.push(
         <TouchableOpacity
@@ -82,8 +82,8 @@ export default function NumberButtons({
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
-      <View style={styles.numberButtonGroup} onLayout={handleLayout}>
-        {containerWidth > 0 && renderNumberButtons()}
+      <View style={styles.buttonGroup} onLayout={handleLayout}>
+        {containerWidth > 0 && renderButtonsGroup()}
       </View>
     </ScrollView>
   );
@@ -94,18 +94,17 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
   },
-  numberButtonGroup: {
+  buttonGroup: {
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
-    // margin: 10,
     gap: 10,
   },
 });
 
 // 动物与数字的映射关系
-export const animalNumberMap = {
+export const animalAgeMap = {
   // 鼠: [1, 13, 25, 37, 49],
   // 牛: [2, 14, 26, 38],
   // 虎: [3, 15, 27, 39],

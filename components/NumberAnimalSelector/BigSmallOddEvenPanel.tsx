@@ -1,7 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
-interface SelectButtonsProps {
+interface BigSmallOddEvenButtonsGroupProps {
   showAnimals: boolean;
   toggleAnimalsPanel: () => void;
   allSelected: boolean;
@@ -17,7 +17,7 @@ interface SelectButtonsProps {
   evenSelected: boolean;
 }
 
-export default function SelectButtons({
+export default function BigSmallOddEvenButtonsGroup({
   showAnimals,
   toggleAnimalsPanel,
   allSelected,
@@ -31,7 +31,7 @@ export default function SelectButtons({
   smallSelected,
   oddSelected,
   evenSelected,
-}: SelectButtonsProps) {
+}: BigSmallOddEvenButtonsGroupProps) {
   const theme = useTheme();
 
   // 定义按钮数组

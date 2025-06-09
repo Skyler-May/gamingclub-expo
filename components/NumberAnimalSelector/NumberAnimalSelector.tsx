@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import AnimalPanel from "./AnimalButtonsPanel";
-import SelectButtons from "./BigSmallOddEvenButtons";
-import NumberButtons, { animalNumberMap } from "./NumberButtons";
+import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
+import ButtonsGroup, { animalAgeMap } from "./ButtonsGroup";
 
 interface NumberAnimalSelectorProps {
   // 组件必要属性
@@ -82,8 +82,7 @@ export default function NumberAnimalSelector({
 
   // 选择动物
   const handleSelectAnimal = (animal: string) => {
-    const animalNumbers =
-      animalNumberMap[animal as keyof typeof animalNumberMap];
+    const animalNumbers = animalAgeMap[animal as keyof typeof animalAgeMap];
 
     let newSelectedNumbers: number[];
     let newSelectedAnimals: string[];
@@ -159,7 +158,7 @@ export default function NumberAnimalSelector({
       }
       newSelectedNumbers = Array.from({ length: 49 }, (_, i) => i + 1);
       // 选中所有动物
-      newSelectedAnimals = Object.keys(animalNumberMap);
+      newSelectedAnimals = Object.keys(animalAgeMap);
       setAllSelected(true);
     }
 
@@ -321,7 +320,7 @@ export default function NumberAnimalSelector({
   return (
     <View style={styles.container}>
       <View style={styles.selectButton}>
-        <SelectButtons
+        <BigSmallOddEvenButtonsGroup
           showAnimals={showAnimals}
           toggleAnimalsPanel={toggleAnimalsPanel}
           allSelected={allSelected}
@@ -343,9 +342,9 @@ export default function NumberAnimalSelector({
           />
         )}
       </View>
-      <NumberButtons
+      <ButtonsGroup
         allSelected={allSelected}
-        selectedNumbers={selectedNumbers}
+        selectedButtons={selectedNumbers}
         onSelectNumber={handleSelectNumber}
         onSelectAll={handleSelectAll}
         onClear={handleClear}

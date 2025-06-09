@@ -1,19 +1,19 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { animalNumberMap } from "./NumberButtons";
+import { animalAgeMap } from "./ButtonsGroup";
 import useButtonGroupLayout from "./hooks/useButtonGroupLayout";
 
-interface AnimalButtonsPanelProps {
+interface AnimalButtonsGroupProps {
   // 选中的动物列表
   selectedAnimals: string[];
   // 选择动物的回调函数
   onSelectAnimal: (animal: string) => void;
 }
 
-export default function AnimalButtonsPanel({
+export default function AnimalButtonsGroup({
   selectedAnimals,
   onSelectAnimal,
-}: AnimalButtonsPanelProps) {
+}: AnimalButtonsGroupProps) {
   const theme = useTheme();
   // 使用自定义Hook处理网格布局
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout({
@@ -22,7 +22,7 @@ export default function AnimalButtonsPanel({
   });
 
   // 动物列表
-  const animals = Object.keys(animalNumberMap);
+  const animals = Object.keys(animalAgeMap);
 
   return (
     <View style={styles.animalsPanel} onLayout={handleLayout}>
