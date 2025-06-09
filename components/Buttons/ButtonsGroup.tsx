@@ -1,8 +1,8 @@
-import useButtonGroupLayout from "@/components/NumberAnimalSelector/hooks/useButtonGroupLayout";
+import useButtonGroupLayout from "@/components/Buttons/hooks/useButtonGroupLayout";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,
-} from "@/components/NumberAnimalSelector/utils/buttonGroupStyles";
+} from "@/components/Buttons/utils/buttonGroupStyles";
 import {
   ScrollView,
   StyleSheet,
