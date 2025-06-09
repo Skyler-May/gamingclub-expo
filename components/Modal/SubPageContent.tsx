@@ -1,5 +1,6 @@
 import NumberAnimalSelector from "@/components/Buttons/NumberAnimalSelector";
 import Balance from "@/components/Wallet/Balance";
+import { data } from "@/constants/data";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SubmitButton from "../Buttons/SubmitButton";
@@ -17,6 +18,7 @@ const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
           {/* <Text style={styles.pageTitle}>A 页面内容</Text>
           <Text>这是 A 页面的详细内容</Text> */}
           <NumberAnimalSelector
+            buttonDescription={data[0].describe}
             onSelectionChange={(numbers, animals) => {
               console.log("选中的数字:", numbers);
               console.log("选中的动物:", animals);
