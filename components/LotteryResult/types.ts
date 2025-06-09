@@ -1,3 +1,4 @@
+// type类型
 export type LotteryResult = {
   expect: string;
   openCode: string;
@@ -7,7 +8,8 @@ export type LotteryResult = {
   info: string;
 };
 
-export interface GetLotteryResultsProps {
+// 接口类型
+export interface LotteryResultDisplayOptions {
   apiUrl: string; // 新增apiUrl属性，由父组件传入
   showExpect?: boolean;
   showOpenCode?: boolean;
@@ -18,8 +20,3 @@ export interface GetLotteryResultsProps {
   shouldCalculateExpect?: boolean;
   calculateExpect?: (expect: string) => number;
 }
-
-// 保留这些常量供父组件或其他地方使用
-export const MO_API_URL = "https://macaumarksix.com/api/live" as const;
-export const NEWMO_API_URL = "https://macaumarksix.com/api/live2" as const;
-export const MOTHREE_API_URL = "https://macaumarksix.com/api/live3" as const;

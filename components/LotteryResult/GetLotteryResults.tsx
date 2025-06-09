@@ -6,9 +6,9 @@ import {
   Text,
   View,
 } from "react-native";
-import { GetLotteryResultsProps, LotteryResult } from "./types";
+import { LotteryResult, LotteryResultDisplayOptions } from "./types";
 
-const GetLotteryResults: React.FC<GetLotteryResultsProps> = ({
+const GetLotteryResults: React.FC<LotteryResultDisplayOptions> = ({
   apiUrl,
   showExpect = false,
   showOpenCode = false,

@@ -1,6 +1,6 @@
 import CountdownTimer from "@/components/CountdownTimer";
+import { MO_API_URL } from "@/components/LotteryResult/api";
 import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
-import { MO_API_URL } from "@/components/LotteryResult/types";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import { useState } from "react";
