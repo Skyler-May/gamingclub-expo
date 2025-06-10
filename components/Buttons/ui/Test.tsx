@@ -4,28 +4,35 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
 } from "react-native";
 
 interface ButtonsGroupProps {
   length: number;
+  displayInfo: (index: number) => string;
   allSelected: boolean;
   selectedButtons: number[];
   onSelectButton: (number: number) => void;
-  onSelectAll: () => void;
-  onClear: () => void;
+  onSelectAll?: () => void;
+  onClear?: () => void;
   buttonDescription?: string;
+  selectedButtonStyle?: (index: number, isSelected: boolean) => object;
+  ButtonDefaultTextStyle?: (index: number, isSelected: boolean) => TextStyle;
 }
 
 export default function ButtonsGroup({
   length,
+  displayInfo,
   allSelected,
   selectedButtons,
   onSelectButton,
   onSelectAll,
   onClear,
   buttonDescription,
+  selectedButtonStyle,
+  ButtonDefaultTextStyle,
 }: ButtonsGroupProps) {
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout();
 
@@ -33,6 +40,9 @@ export default function ButtonsGroup({
     const buttons = [];
     for (let i = 1; i <= length; i++) {
       const isSelected = selectedButtons.includes(i);
+      const label =
+        typeof displayInfo === "function" ? displayInfo(i) : displayInfo;
+
       buttons.push(
         <TouchableOpacity
           key={i}
@@ -44,9 +54,14 @@ export default function ButtonsGroup({
             borderRadius: 5,
             borderWidth: 1,
             borderColor: isSelected ? "#fff" : "#ccc",
+            ...(selectedButtonStyle?.(i, isSelected) ?? {}),
           }}
           onPress={() => onSelectButton(i)}
         >
+          <Text style={ButtonDefaultTextStyle?.(i, isSelected) ?? {}}>
+            {label}
+          </Text>
+
           {buttonDescription && (
             <Text
               style={{
