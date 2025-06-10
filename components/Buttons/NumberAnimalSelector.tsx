@@ -3,6 +3,10 @@ import { StyleSheet, View } from "react-native";
 import AnimalButtonsGroup from "./AnimalButtonsPanel";
 import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
 import ButtonsGroup, { animalAgeMap } from "./ButtonsGroup";
+import {
+  ButtonDefaultTextStyle,
+  selectedButtonStyle,
+} from "./utils/buttonGroupStyles";
 
 interface NumberAnimalSelectorProps {
   // 组件必要属性
@@ -38,6 +42,8 @@ export default function NumberAnimalSelector({
   const [oddSelected, setOddSelected] = useState(false);
   const [evenSelected, setEvenSelected] = useState(false);
 
+  // 数字按钮显示的文本
+  const label = (i: number) => i.toString().padStart(2, "0"); // 保持两位数
   // 切换动物面板显示状态
   const toggleAnimalsPanel = () => {
     // 清除其他按钮的选中状态
@@ -344,12 +350,15 @@ export default function NumberAnimalSelector({
       </View>
       <ButtonsGroup
         length={49}
-        allSelected={allSelected}
         selectedButtons={selectedNumbers}
-        onSelectNumber={handleSelectNumber}
+        onSelectButton={handleSelectNumber}
+        allSelected={allSelected}
         onSelectAll={handleSelectAll}
         onClear={handleClear}
+        displayInfo={label}
         buttonDescription={buttonDescription}
+        selectedButtonStyle={selectedButtonStyle}
+        ButtonDefaultTextStyle={ButtonDefaultTextStyle}
       />
     </View>
   );

@@ -1,5 +1,5 @@
 import { QuickButton } from "@/components/Buttons/QuickButton";
-import Test from "@/components/Buttons/ui/Test";
+import Test from "@/components/Buttons/test/Test";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,

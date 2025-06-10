@@ -1,40 +1,39 @@
 import useButtonGroupLayout from "@/components/Buttons/hooks/useButtonGroupLayout";
 import {
-  ButtonDefaultTextStyle,
-  selectedButtonStyle,
-} from "@/components/Buttons/utils/buttonGroupStyles";
-import {
   ScrollView,
   StyleSheet,
   Text,
+  TextStyle,
   TouchableOpacity,
   View,
 } from "react-native";
 
 interface ButtonsGroupProps {
+  // 必要属性
   length: number;
-  // 全选状态
-  allSelected: boolean;
-  // 选中的数字列表
   selectedButtons: number[];
-  // 选择数字的回调函数
-  onSelectNumber: (number: number) => void;
-  // 全选的回调函数
-  onSelectAll: () => void;
-  // 清空的回调函数
-  onClear: () => void;
-  // 按钮下方的描述文本
+  onSelectButton: (number: number) => void;
+  // 可选属性
+  allSelected?: boolean;
+  onSelectAll?: () => void;
+  onClear?: () => void;
+  displayInfo?: (index: number) => string;
   buttonDescription?: string;
+  selectedButtonStyle?: (index: number, isSelected: boolean) => object;
+  ButtonDefaultTextStyle?: (index: number, isSelected: boolean) => TextStyle;
 }
 
 export default function ButtonsGroup({
   length,
-  allSelected,
   selectedButtons,
-  onSelectNumber,
+  onSelectButton,
+  allSelected,
   onSelectAll,
   onClear,
+  displayInfo,
   buttonDescription,
+  selectedButtonStyle,
+  ButtonDefaultTextStyle,
 }: ButtonsGroupProps) {
   // 使用自定义Hook处理网格布局
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout();
@@ -43,9 +42,9 @@ export default function ButtonsGroup({
   const renderButtonsGroup = () => {
     const buttons = [];
     for (let i = 1; i <= length; i++) {
-      // 数值小于两位的前面加0
-      const displayNumber = i < 10 ? `0${i}` : `${i}`;
       const isSelected = selectedButtons.includes(i);
+      const label =
+        typeof displayInfo === "function" ? displayInfo(i) : displayInfo;
 
       buttons.push(
         <TouchableOpacity
@@ -55,15 +54,15 @@ export default function ButtonsGroup({
             alignItems: "center",
             width: buttonWidth,
             height: buttonWidth,
-            ...selectedButtonStyle(i, isSelected),
             borderRadius: 5,
             borderWidth: 1,
             borderColor: isSelected ? "#fff" : "#ccc",
+            ...(selectedButtonStyle?.(i, isSelected) ?? {}),
           }}
-          onPress={() => onSelectNumber(i)}
+          onPress={() => onSelectButton(i)}
         >
-          <Text style={ButtonDefaultTextStyle(i, isSelected)}>
-            {displayNumber}
+          <Text style={ButtonDefaultTextStyle?.(i, isSelected) ?? {}}>
+            {label}
           </Text>
           {buttonDescription && (
             <Text
