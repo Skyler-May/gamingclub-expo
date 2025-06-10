@@ -9,18 +9,20 @@ import {
 } from "react-native";
 
 interface ButtonsGroupProps {
+  length: number;
   allSelected: boolean;
   selectedButtons: number[];
-  onSelectNumber: (number: number) => void;
+  onSelectButton: (number: number) => void;
   onSelectAll: () => void;
   onClear: () => void;
   buttonDescription?: string;
 }
 
 export default function ButtonsGroup({
+  length,
   allSelected,
   selectedButtons,
-  onSelectNumber,
+  onSelectButton,
   onSelectAll,
   onClear,
   buttonDescription,
@@ -29,7 +31,7 @@ export default function ButtonsGroup({
 
   const renderButtonsGroup = () => {
     const buttons = [];
-    for (let i = 1; i <= 12; i++) {
+    for (let i = 1; i <= length; i++) {
       const isSelected = selectedButtons.includes(i);
       buttons.push(
         <TouchableOpacity
@@ -43,7 +45,7 @@ export default function ButtonsGroup({
             borderWidth: 1,
             borderColor: isSelected ? "#fff" : "#ccc",
           }}
-          onPress={() => onSelectNumber(i)}
+          onPress={() => onSelectButton(i)}
         >
           {buttonDescription && (
             <Text
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
   buttonGroup: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: 10,
   },

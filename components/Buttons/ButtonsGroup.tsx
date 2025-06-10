@@ -12,6 +12,7 @@ import {
 } from "react-native";
 
 interface ButtonsGroupProps {
+  length: number;
   // 全选状态
   allSelected: boolean;
   // 选中的数字列表
@@ -27,6 +28,7 @@ interface ButtonsGroupProps {
 }
 
 export default function ButtonsGroup({
+  length,
   allSelected,
   selectedButtons,
   onSelectNumber,
@@ -40,7 +42,7 @@ export default function ButtonsGroup({
   // 渲染数字按钮
   const renderButtonsGroup = () => {
     const buttons = [];
-    for (let i = 1; i <= 49; i++) {
+    for (let i = 1; i <= length; i++) {
       // 数值小于两位的前面加0
       const displayNumber = i < 10 ? `0${i}` : `${i}`;
       const isSelected = selectedButtons.includes(i);
@@ -97,7 +99,7 @@ const styles = StyleSheet.create({
   buttonGroup: {
     flexDirection: "row",
     flexWrap: "wrap",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     alignItems: "center",
     gap: 10,
   },

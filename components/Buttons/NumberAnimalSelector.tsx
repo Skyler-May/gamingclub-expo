@@ -343,6 +343,7 @@ export default function NumberAnimalSelector({
         )}
       </View>
       <ButtonsGroup
+        length={49}
         allSelected={allSelected}
         selectedButtons={selectedNumbers}
         onSelectNumber={handleSelectNumber}
