@@ -1,5 +1,5 @@
 import { DAY, LUNAR_INFO, MONTH, ZODIACS } from "./lunar-data";
-import useCurrentDateTime from "./useCurrentTime";
+import useCurrentDateTime from "./useSolar";
 
 // 农历日期接口
 interface LunarDate {
