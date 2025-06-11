@@ -4,9 +4,7 @@ import { animalAgeMap } from "./ButtonsGroup";
 import useButtonGroupLayout from "./hooks/useButtonGroupLayout";
 
 interface AnimalButtonsGroupProps {
-  // 选中的动物列表
   selectedAnimals: string[];
-  // 选择动物的回调函数
   onSelectAnimal: (animal: string) => void;
 }
 
@@ -15,9 +13,8 @@ export default function AnimalButtonsGroup({
   onSelectAnimal,
 }: AnimalButtonsGroupProps) {
   const theme = useTheme();
-  // 使用自定义Hook处理网格布局
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout({
-    buttonsPerRow: 6, // 每行显示6个动物按钮
+    buttonsPerRow: 6,
     gapSize: 10,
   });
 
@@ -64,7 +61,6 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "space-between",
     borderRadius: 5,
-    // margin: 10,
     marginBottom: 10,
     gap: 10,
   },
