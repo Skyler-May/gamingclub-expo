@@ -1,6 +1,6 @@
-import Balance from "@/components/Wallet/Balance";
-import BankCards from "@/components/Wallet/BankCards";
-import ThirdPartyAccounts from "@/components/Wallet/ThirdPartyAccounts";
+import Balance from "@/components/ui/Wallet/Balance";
+import BankCards from "@/components/ui/Wallet/BankCards";
+import ThirdPartyAccounts from "@/components/ui/Wallet/ThirdPartyAccounts";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";
 
