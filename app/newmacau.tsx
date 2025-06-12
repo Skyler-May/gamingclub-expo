@@ -1,8 +1,8 @@
 import CountdownTimer from "@/components/CountdownTimer";
-import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
-import { NEWMO_API_URL } from "@/components/LotteryResult/constants/mo-api-url";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
+import GetLotteryResults from "@/components/ui/GetLotteryResults";
+import { NEWMO_API_URL } from "@/constants/Mo-Api-Url";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";

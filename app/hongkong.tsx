@@ -1,9 +1,9 @@
+import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import {
   MO_API_URL,
   MOTHREE_API_URL,
   NEWMO_API_URL,
-} from "@/components/LotteryResult/constants/mo-api-url";
-import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
+} from "@/constants/Mo-Api-Url";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function HongKongScreen() {
