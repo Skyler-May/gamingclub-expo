@@ -1,3 +1,4 @@
+import { modalPages, PageData } from "@/types/modal-subPages";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -7,8 +8,6 @@ import {
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import CustomModal from "./MultiPageModal";
-import { modalPages } from "./constants/pageData";
-import { PageData } from "./types/page";
 
 // 使用从pageData导入的PageData接口
 
