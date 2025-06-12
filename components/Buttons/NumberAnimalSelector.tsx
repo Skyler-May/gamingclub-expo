@@ -4,6 +4,8 @@ import AnimalButtonsGroup from "./AnimalButtonsPanel";
 import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
 import ButtonsGroup from "./ButtonsGroup";
 
+import { handleSelectBig } from "@/features/BSOE-Panel/handleSelectBig";
+import { handleSelectSmall } from "@/features/BSOE-Panel/handleSelectSmall";
 import { getAnimalAgeMap } from "./utils/animalAgeMap";
 import {
   ButtonDefaultTextStyle,
@@ -193,72 +195,6 @@ export default function NumberAnimalSelector({
     clearAllSelections();
   };
 
-  // 选择大数（25-49）
-  const handleSelectBig = () => {
-    // 清除其他按钮的选中状态
-    setAllSelected(false);
-    setSmallSelected(false);
-    setOddSelected(false);
-    setEvenSelected(false);
-    // 关闭动物面板
-    setShowAnimals(false);
-
-    let newSelectedNumbers: number[];
-
-    if (bigSelected) {
-      // 如果已选中大数，则取消选中
-      clearAllSelections();
-      return;
-    } else {
-      // 如果未选中大数，则选中
-      // 检查是否超过最大可选数量
-      if (maxSelectCount && maxSelectCount < 25) {
-        // 如果有限制且小于25，则不执行选择
-        return;
-      }
-
-      clearAllSelections(); // 先清除所有选择
-      newSelectedNumbers = Array.from({ length: 25 }, (_, i) => i + 25);
-      setSelectedNumbers(newSelectedNumbers);
-      setBigSelected(true);
-      // 触发选择变化回调
-      onSelectionChange?.(newSelectedNumbers, []);
-    }
-  };
-
-  // 选择小数（1-24）
-  const handleSelectSmall = () => {
-    // 清除其他按钮的选中状态
-    setAllSelected(false);
-    setBigSelected(false);
-    setOddSelected(false);
-    setEvenSelected(false);
-    // 关闭动物面板
-    setShowAnimals(false);
-
-    let newSelectedNumbers: number[];
-
-    if (smallSelected) {
-      // 如果已选中小数，则取消选中
-      clearAllSelections();
-      return;
-    } else {
-      // 如果未选中小数，则选中
-      // 检查是否超过最大可选数量
-      if (maxSelectCount && maxSelectCount < 24) {
-        // 如果有限制且小于24，则不执行选择
-        return;
-      }
-
-      clearAllSelections(); // 先清除所有选择
-      newSelectedNumbers = Array.from({ length: 24 }, (_, i) => i + 1);
-      setSelectedNumbers(newSelectedNumbers);
-      setSmallSelected(true);
-      // 触发选择变化回调
-      onSelectionChange?.(newSelectedNumbers, []);
-    }
-  };
-
   // 选择单数（奇数）
   const handleSelectOdd = () => {
     // 清除其他按钮的选中状态
@@ -344,8 +280,36 @@ export default function NumberAnimalSelector({
           allSelected={allSelected}
           onSelectAll={handleSelectAll}
           onClear={handleClear}
-          onSelectBig={handleSelectBig}
-          onSelectSmall={handleSelectSmall}
+          onSelectBig={() => {
+            handleSelectBig({
+              bigSelected,
+              maxSelectCount,
+              clearAllSelections,
+              setAllSelected,
+              setSmallSelected,
+              setOddSelected,
+              setEvenSelected,
+              setShowAnimals,
+              setSelectedNumbers,
+              setBigSelected,
+              onSelectionChange,
+            });
+          }}
+          onSelectSmall={() => {
+            handleSelectSmall({
+              smallSelected,
+              maxSelectCount,
+              clearAllSelections,
+              setAllSelected,
+              setBigSelected,
+              setOddSelected,
+              setEvenSelected,
+              setShowAnimals,
+              setSelectedNumbers,
+              setSmallSelected,
+              onSelectionChange,
+            });
+          }}
           onSelectOdd={handleSelectOdd}
           onSelectEven={handleSelectEven}
           bigSelected={bigSelected}
