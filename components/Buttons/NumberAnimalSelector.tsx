@@ -183,10 +183,11 @@ export default function NumberAnimalSelector({
           oddSelected={oddSelected}
           evenSelected={evenSelected}
         />
-        {/* {showAnimals && (
+        {showAnimals && (
           <AnimalButtonsPanel
             selectedAnimals={selectedAnimals}
             onSelectAnimal={(animal) => {
+              // 必须接收返回值并更新状态
               const { newSelectedAnimals, newSelectedNumbers } =
                 handleSelectAnimal({
                   selectedAnimals,
@@ -194,22 +195,13 @@ export default function NumberAnimalSelector({
                   animal,
                   maxSelectCount,
                 });
+
+              // 更新React状态
               setSelectedAnimals(newSelectedAnimals);
               setSelectedNumbers(newSelectedNumbers);
+
+              // 触发回调（如果存在）
               onSelectionChange?.(newSelectedNumbers, newSelectedAnimals);
-            }}
-          />
-        )} */}
-        {showAnimals && (
-          <AnimalButtonsPanel
-            selectedAnimals={selectedAnimals}
-            onSelectAnimal={(animal) => {
-              handleSelectAnimal({
-                selectedAnimals,
-                selectedNumbers,
-                animal,
-                maxSelectCount,
-              });
             }}
           />
         )}
