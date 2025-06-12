@@ -65,7 +65,7 @@ export default function BigSmallOddEvenButtonsGroup({
       backgroundColor: "orange", // 使用主题的主色
     },
     text: {
-      fontSize: 14,
+      fontSize: 16,
       color: "orange", // 默认文本颜色
     },
     selectedText: {

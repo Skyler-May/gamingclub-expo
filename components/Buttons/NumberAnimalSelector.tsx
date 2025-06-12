@@ -3,7 +3,8 @@ import { StyleSheet, View } from "react-native";
 import AnimalButtonsGroup from "./AnimalButtonsPanel";
 import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
 import ButtonsGroup from "./ButtonsGroup";
-import { animalAgeMap } from "./constants/animalAgeMap";
+
+import { getAnimalAgeMap } from "./utils/animalAgeMap";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,
@@ -89,6 +90,11 @@ export default function NumberAnimalSelector({
 
   // 选择动物
   const handleSelectAnimal = (animal: string) => {
+    const animalAgeMap = getAnimalAgeMap();
+    if (!animalAgeMap) {
+      throw new Error("animalAgeMap 尚未初始化！");
+    }
+
     const animalNumbers = animalAgeMap[animal as keyof typeof animalAgeMap];
 
     let newSelectedNumbers: number[];
@@ -165,7 +171,12 @@ export default function NumberAnimalSelector({
       }
       newSelectedNumbers = Array.from({ length: 49 }, (_, i) => i + 1);
       // 选中所有动物
-      newSelectedAnimals = Object.keys(animalAgeMap);
+      const animalAgeMap = getAnimalAgeMap();
+      if (!animalAgeMap) {
+        throw new Error("animalAgeMap 尚未初始化！");
+      }
+
+      newSelectedAnimals = Object.keys(animalAgeMap) ?? [];
       setAllSelected(true);
     }
 

@@ -1,3 +1,4 @@
+import { setAnimalAgeMap } from "@/components/Buttons/utils/animalAgeMap"; // ✅ 新增：导入 set 方法
 import useLunar from "@/hooks/date/useLunar";
 
 // 生肖顺序
@@ -55,7 +56,7 @@ const useZodiacAge = () => {
 
     result[name] = generateValidAges(startAge, length);
   }
-
+  setAnimalAgeMap(result); // ✅ 新增：将动态结果保存为静态缓存
   console.log("当前生肖:", zodiac);
   console.log("生肖年龄列表:", result);
 

@@ -1,8 +1,10 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
-import { animalAgeMap } from "./constants/animalAgeMap";
+// import { animalAgeMap } from "./constants/animalAgeMap";
+import useZodiacAge from "@/hooks/date/useZodiacAge"; // ✅ 新增
 import useButtonGroupLayout from "./hooks/useButtonGroupLayout";
+import { getAnimalAgeMap } from "./utils/animalAgeMap";
 
 interface AnimalButtonsGroupProps {
   selectedAnimals: string[];
@@ -19,6 +21,11 @@ export default function AnimalButtonsGroup({
     gapSize: 10,
   });
 
+  useZodiacAge(); // ✅ 新增：使用自定义 hook
+  const animalAgeMap = getAnimalAgeMap();
+  if (!animalAgeMap) {
+    throw new Error("animalAgeMap 尚未初始化！");
+  }
   // 动物列表
   const animals = Object.keys(animalAgeMap);
 
@@ -42,7 +49,7 @@ export default function AnimalButtonsGroup({
           >
             <Text
               style={{
-                fontSize: 25,
+                fontSize: 16,
                 color: selectedAnimals.includes(animal)
                   ? theme.colors.surface
                   : theme.colors.primary,
