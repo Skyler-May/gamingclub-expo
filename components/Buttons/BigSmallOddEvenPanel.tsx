@@ -45,7 +45,6 @@ export default function BigSmallOddEvenButtonsGroup({
     { text: "清空", onPress: onClear, selected: false },
   ];
 
-  // 创建样式
   const styles = StyleSheet.create({
     buttonRow: {
       flexDirection: "row",
@@ -62,14 +61,14 @@ export default function BigSmallOddEvenButtonsGroup({
       height: 30,
     },
     selectedButton: {
-      backgroundColor: "orange", // 使用主题的主色
+      backgroundColor: "orange",
     },
     text: {
       fontSize: 16,
-      color: "orange", // 默认文本颜色
+      color: "orange",
     },
     selectedText: {
-      color: theme.colors.surface, // 选中时的文本颜色 theme.colors.onPrimary
+      color: theme.colors.surface,
     },
   });
 
