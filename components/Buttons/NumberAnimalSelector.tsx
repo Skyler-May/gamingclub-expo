@@ -2,7 +2,8 @@ import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import AnimalButtonsGroup from "./AnimalButtonsPanel";
 import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
-import ButtonsGroup, { animalAgeMap } from "./ButtonsGroup";
+import ButtonsGroup from "./ButtonsGroup";
+import { animalAgeMap } from "./constants/animalAgeMap";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,

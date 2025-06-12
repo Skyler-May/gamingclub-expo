@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
-import { animalAgeMap } from "./ButtonsGroup";
+
+import { animalAgeMap } from "./constants/animalAgeMap";
 import useButtonGroupLayout from "./hooks/useButtonGroupLayout";
 
 interface AnimalButtonsGroupProps {
