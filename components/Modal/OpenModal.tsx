@@ -7,7 +7,8 @@ import {
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import CustomModal from "./MultiPageModal";
-import { modalPages, PageData } from "./constants/pageData";
+import { modalPages } from "./constants/pageData";
+import { PageData } from "./types/page";
 
 // 使用从pageData导入的PageData接口
 
