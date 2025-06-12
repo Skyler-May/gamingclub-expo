@@ -4,9 +4,13 @@ import AnimalButtonsGroup from "./AnimalButtonsPanel";
 import BigSmallOddEvenButtonsGroup from "./BigSmallOddEvenPanel";
 import ButtonsGroup from "./ButtonsGroup";
 
+import { handleClear } from "@/features/BSOE-Panel/handleClear";
+import { handleSelectAll } from "@/features/BSOE-Panel/handleSelectAll";
 import { handleSelectBig } from "@/features/BSOE-Panel/handleSelectBig";
+import { handleSelectEven } from "@/features/BSOE-Panel/handleSelectEven";
+import { handleSelectOdd } from "@/features/BSOE-Panel/handleSelectOdd";
 import { handleSelectSmall } from "@/features/BSOE-Panel/handleSelectSmall";
-import { getAnimalAgeMap } from "./utils/animalAgeMap";
+import { toggleAnimalsPanel } from "@/features/BSOE-Panel/toggleAnimalsPanel";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,
@@ -48,25 +52,6 @@ export default function NumberAnimalSelector({
 
   // 数字按钮显示的文本
   const label = (i: number) => i.toString().padStart(2, "0"); // 保持两位数
-  // 切换动物面板显示状态
-  const toggleAnimalsPanel = () => {
-    // 清除其他按钮的选中状态
-    setAllSelected(false);
-    setBigSelected(false);
-    setSmallSelected(false);
-    setOddSelected(false);
-    setEvenSelected(false);
-
-    if (showAnimals) {
-      // 如果已显示动物面板，则关闭
-      setShowAnimals(false);
-      clearAllSelections();
-    } else {
-      // 如果未显示动物面板，则打开
-      setShowAnimals(true);
-      clearAllSelections();
-    }
-  };
 
   // 选择数字
   const handleSelectNumber = (number: number) => {
@@ -90,48 +75,48 @@ export default function NumberAnimalSelector({
     onSelectionChange?.(newSelectedNumbers, selectedAnimals);
   };
 
-  // 选择动物
-  const handleSelectAnimal = (animal: string) => {
-    const animalAgeMap = getAnimalAgeMap();
-    if (!animalAgeMap) {
-      throw new Error("animalAgeMap 尚未初始化！");
-    }
+  // // 选择动物
+  // const handleSelectAnimal = (animal: string) => {
+  //   const animalAgeMap = getAnimalAgeMap();
+  //   if (!animalAgeMap) {
+  //     throw new Error("animalAgeMap 尚未初始化！");
+  //   }
 
-    const animalNumbers = animalAgeMap[animal as keyof typeof animalAgeMap];
+  //   const animalNumbers = animalAgeMap[animal as keyof typeof animalAgeMap];
 
-    let newSelectedNumbers: number[];
-    let newSelectedAnimals: string[];
+  //   let newSelectedNumbers: number[];
+  //   let newSelectedAnimals: string[];
 
-    if (selectedAnimals.includes(animal)) {
-      // 如果已选中，则取消选中该动物及其对应的数字
-      newSelectedAnimals = selectedAnimals.filter((a) => a !== animal);
-      // 取消选中该动物对应的数字
-      newSelectedNumbers = selectedNumbers.filter(
-        (num) => !animalNumbers.includes(num)
-      );
-    } else {
-      // 如果未选中，则选中该动物及其对应的数字
-      // 检查是否超过最大可选数量
-      if (
-        maxSelectCount &&
-        selectedNumbers.length + animalNumbers.length > maxSelectCount
-      ) {
-        // 如果超过最大可选数量，则不添加
-        return;
-      }
-      newSelectedAnimals = [...selectedAnimals, animal];
-      // 选中该动物对应的所有数字
-      newSelectedNumbers = [
-        ...selectedNumbers,
-        ...animalNumbers.filter((num) => !selectedNumbers.includes(num)),
-      ];
-    }
+  //   if (selectedAnimals.includes(animal)) {
+  //     // 如果已选中，则取消选中该动物及其对应的数字
+  //     newSelectedAnimals = selectedAnimals.filter((a) => a !== animal);
+  //     // 取消选中该动物对应的数字
+  //     newSelectedNumbers = selectedNumbers.filter(
+  //       (num) => !animalNumbers.includes(num)
+  //     );
+  //   } else {
+  //     // 如果未选中，则选中该动物及其对应的数字
+  //     // 检查是否超过最大可选数量
+  //     if (
+  //       maxSelectCount &&
+  //       selectedNumbers.length + animalNumbers.length > maxSelectCount
+  //     ) {
+  //       // 如果超过最大可选数量，则不添加
+  //       return;
+  //     }
+  //     newSelectedAnimals = [...selectedAnimals, animal];
+  //     // 选中该动物对应的所有数字
+  //     newSelectedNumbers = [
+  //       ...selectedNumbers,
+  //       ...animalNumbers.filter((num) => !selectedNumbers.includes(num)),
+  //     ];
+  //   }
 
-    setSelectedAnimals(newSelectedAnimals);
-    setSelectedNumbers(newSelectedNumbers);
-    // 触发选择变化回调
-    onSelectionChange?.(newSelectedNumbers, newSelectedAnimals);
-  };
+  //   setSelectedAnimals(newSelectedAnimals);
+  //   setSelectedNumbers(newSelectedNumbers);
+  //   // 触发选择变化回调
+  //   onSelectionChange?.(newSelectedNumbers, newSelectedAnimals);
+  // };
 
   // 清除所有选中状态
   const clearAllSelections = () => {
@@ -146,140 +131,45 @@ export default function NumberAnimalSelector({
     onSelectionChange?.([], []);
   };
 
-  // 全选
-  const handleSelectAll = () => {
-    // 清除其他按钮的选中状态
-    setBigSelected(false);
-    setSmallSelected(false);
-    setOddSelected(false);
-    setEvenSelected(false);
-    // 关闭动物面板
-    setShowAnimals(false);
-
-    let newSelectedNumbers: number[];
-    let newSelectedAnimals: string[];
-
-    if (allSelected) {
-      // 如果已全选，则取消全选
-      newSelectedNumbers = [];
-      newSelectedAnimals = [];
-      setAllSelected(false);
-    } else {
-      // 如果未全选，则全选
-      // 检查是否有最大可选数量限制
-      if (maxSelectCount && maxSelectCount < 49) {
-        // 如果有限制且小于49，则不执行全选
-        return;
-      }
-      newSelectedNumbers = Array.from({ length: 49 }, (_, i) => i + 1);
-      // 选中所有动物
-      const animalAgeMap = getAnimalAgeMap();
-      if (!animalAgeMap) {
-        throw new Error("animalAgeMap 尚未初始化！");
-      }
-
-      newSelectedAnimals = Object.keys(animalAgeMap) ?? [];
-      setAllSelected(true);
-    }
-
-    setSelectedNumbers(newSelectedNumbers);
-    setSelectedAnimals(newSelectedAnimals);
-    // 触发选择变化回调
-    onSelectionChange?.(newSelectedNumbers, newSelectedAnimals);
-  };
-
-  // 清空
-  const handleClear = () => {
-    // 关闭动物面板
-    setShowAnimals(false);
-    clearAllSelections();
-  };
-
-  // 选择单数（奇数）
-  const handleSelectOdd = () => {
-    // 清除其他按钮的选中状态
-    setAllSelected(false);
-    setBigSelected(false);
-    setSmallSelected(false);
-    setEvenSelected(false);
-    // 关闭动物面板
-    setShowAnimals(false);
-
-    let newSelectedNumbers: number[];
-
-    if (oddSelected) {
-      // 如果已选中单数，则取消选中
-      clearAllSelections();
-      return;
-    } else {
-      // 如果未选中单数，则选中
-      // 计算奇数的数量
-      const oddCount = Math.ceil(49 / 2);
-      // 检查是否超过最大可选数量
-      if (maxSelectCount && maxSelectCount < oddCount) {
-        // 如果有限制且小于奇数数量，则不执行选择
-        return;
-      }
-
-      clearAllSelections(); // 先清除所有选择
-      newSelectedNumbers = Array.from(
-        { length: 25 },
-        (_, i) => i * 2 + 1
-      ).filter((n) => n <= 49);
-      setSelectedNumbers(newSelectedNumbers);
-      setOddSelected(true);
-      // 触发选择变化回调
-      onSelectionChange?.(newSelectedNumbers, []);
-    }
-  };
-
-  // 选择双数（偶数）
-  const handleSelectEven = () => {
-    // 清除其他按钮的选中状态
-    setAllSelected(false);
-    setBigSelected(false);
-    setSmallSelected(false);
-    setOddSelected(false);
-    // 关闭动物面板
-    setShowAnimals(false);
-
-    let newSelectedNumbers: number[];
-
-    if (evenSelected) {
-      // 如果已选中双数，则取消选中
-      clearAllSelections();
-      return;
-    } else {
-      // 如果未选中双数，则选中
-      // 计算偶数的数量
-      const evenCount = Math.floor(49 / 2);
-      // 检查是否超过最大可选数量
-      if (maxSelectCount && maxSelectCount < evenCount) {
-        // 如果有限制且小于偶数数量，则不执行选择
-        return;
-      }
-
-      clearAllSelections(); // 先清除所有选择
-      newSelectedNumbers = Array.from(
-        { length: 24 },
-        (_, i) => (i + 1) * 2
-      ).filter((n) => n <= 49);
-      setSelectedNumbers(newSelectedNumbers);
-      setEvenSelected(true);
-      // 触发选择变化回调
-      onSelectionChange?.(newSelectedNumbers, []);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <View style={styles.selectButton}>
         <BigSmallOddEvenButtonsGroup
           showAnimals={showAnimals}
-          toggleAnimalsPanel={toggleAnimalsPanel}
+          toggleAnimalsPanel={() => {
+            toggleAnimalsPanel({
+              showAnimals,
+              setShowAnimals,
+              setAllSelected,
+              setBigSelected,
+              setSmallSelected,
+              setOddSelected,
+              setEvenSelected,
+              clearAllSelections,
+            });
+          }}
           allSelected={allSelected}
-          onSelectAll={handleSelectAll}
-          onClear={handleClear}
+          onSelectAll={() => {
+            handleSelectAll({
+              allSelected,
+              maxSelectCount,
+              setAllSelected,
+              setBigSelected,
+              setSmallSelected,
+              setOddSelected,
+              setEvenSelected,
+              setShowAnimals,
+              setSelectedNumbers,
+              setSelectedAnimals,
+              onSelectionChange,
+            });
+          }}
+          onClear={() => {
+            handleClear({
+              setShowAnimals,
+              clearAllSelections,
+            });
+          }}
           onSelectBig={() => {
             handleSelectBig({
               bigSelected,
@@ -310,8 +200,36 @@ export default function NumberAnimalSelector({
               onSelectionChange,
             });
           }}
-          onSelectOdd={handleSelectOdd}
-          onSelectEven={handleSelectEven}
+          onSelectOdd={() => {
+            handleSelectOdd({
+              oddSelected,
+              maxSelectCount,
+              clearAllSelections,
+              setAllSelected,
+              setBigSelected,
+              setOddSelected,
+              setEvenSelected,
+              setShowAnimals,
+              setSelectedNumbers,
+              setSmallSelected,
+              onSelectionChange,
+            });
+          }}
+          onSelectEven={() => {
+            handleSelectEven({
+              evenSelected,
+              maxSelectCount,
+              clearAllSelections,
+              setAllSelected,
+              setBigSelected,
+              setSmallSelected,
+              setOddSelected,
+              setShowAnimals,
+              setSelectedNumbers,
+              setEvenSelected,
+              onSelectionChange,
+            });
+          }}
           bigSelected={bigSelected}
           smallSelected={smallSelected}
           oddSelected={oddSelected}
@@ -320,7 +238,7 @@ export default function NumberAnimalSelector({
         {showAnimals && (
           <AnimalButtonsGroup
             selectedAnimals={selectedAnimals}
-            onSelectAnimal={handleSelectAnimal}
+            onSelectAnimal={() => {}}
           />
         )}
       </View>
@@ -329,8 +247,27 @@ export default function NumberAnimalSelector({
         selectedButtons={selectedNumbers}
         onSelectButton={handleSelectNumber}
         allSelected={allSelected}
-        onSelectAll={handleSelectAll}
-        onClear={handleClear}
+        onSelectAll={() => {
+          handleSelectAll({
+            allSelected,
+            maxSelectCount,
+            setAllSelected,
+            setBigSelected,
+            setSmallSelected,
+            setOddSelected,
+            setEvenSelected,
+            setShowAnimals,
+            setSelectedNumbers,
+            setSelectedAnimals,
+            onSelectionChange,
+          });
+        }}
+        onClear={() => {
+          handleClear({
+            setShowAnimals,
+            clearAllSelections,
+          });
+        }}
         displayInfo={label}
         buttonDescription={buttonDescription}
         selectedButtonStyle={selectedButtonStyle}
