@@ -1,4 +1,4 @@
-import useButtonGroupLayout from "@/components/Buttons/hooks/useButtonGroupLayout";
+import useButtonGroupLayout from "@/hooks/useButtonGroupLayout";
 import {
   ScrollView,
   StyleSheet,

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
-// import { animalAgeMap } from "./constants/animalAgeMap";
-import useZodiacAge from "@/hooks/date/useZodiacAge"; // ✅ 新增
-import useButtonGroupLayout from "./hooks/useButtonGroupLayout";
+// import { animalAgeMap } from "./constants/animalAgeMap"; 手动测试
+import useZodiacAge from "@/hooks/Lunar/useZodiacAge"; // ✅ 新增
+import useButtonGroupLayout from "@/hooks/useButtonGroupLayout";
 import { getAnimalAgeMap } from "./utils/animalAgeMap";
 
 interface AnimalButtonsGroupProps {

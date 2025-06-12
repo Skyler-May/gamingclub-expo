@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 
-interface UseBigSmallOddEvenPanelHookOptions {
+interface UseBigSmallOddEvenPanelOptions {
   maxSelectCount?: number;
   onSelectionChange?: (numbers: number[], animals: string[]) => void;
 }
 
-export function useBigSmallOddEvenPanelHook(
-  options?: UseBigSmallOddEvenPanelHookOptions
+export function useBigSmallOddEvenPanel(
+  options?: UseBigSmallOddEvenPanelOptions
 ) {
   const [selectedNumbers, setSelectedNumbers] = useState<number[]>([]);
   const [selectedAnimals, setSelectedAnimals] = useState<string[]>([]);
