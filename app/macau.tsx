@@ -1,5 +1,5 @@
 import CountdownTimer from "@/components/CountdownTimer";
-import { MO_API_URL } from "@/components/LotteryResult/constants/api";
+import { MO_API_URL } from "@/components/LotteryResult/constants/mo-api-url";
 import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";

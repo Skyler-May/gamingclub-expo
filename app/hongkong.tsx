@@ -2,7 +2,7 @@ import {
   MO_API_URL,
   MOTHREE_API_URL,
   NEWMO_API_URL,
-} from "@/components/LotteryResult/constants/api";
+} from "@/components/LotteryResult/constants/mo-api-url";
 import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";

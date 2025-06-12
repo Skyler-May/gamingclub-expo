@@ -1,8 +1,8 @@
 import FoldCarousel from "@/components/Carousel/Fold/FoldCarousel";
 import { CategoryTabs } from "@/components/ui/CategoryTabs";
 import { GameCard } from "@/components/ui/GameCard";
-import { CATEGORIES, GAMES } from "@/constants/Games/mockData";
-import { Game, GameCategory } from "@/types/game";
+import { CATEGORIES, GAMES } from "@/constants/Games/game-constants";
+import { Game, GameCategory } from "@/types/games-data";
 import React, { useState } from "react";
 import {
   StyleSheet,

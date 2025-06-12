@@ -1,4 +1,4 @@
-import { Game } from "@/types/game";
+import { Game } from "@/types/games-data";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Image,

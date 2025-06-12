@@ -1,6 +1,6 @@
 import CountdownTimer from "@/components/CountdownTimer";
 import GetLotteryResults from "@/components/LotteryResult/GetLotteryResults";
-import { NEWMO_API_URL } from "@/components/LotteryResult/constants/api";
+import { NEWMO_API_URL } from "@/components/LotteryResult/constants/mo-api-url";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import { useState } from "react";

@@ -1,4 +1,4 @@
-import { Game, GameCategoryTab, PlayerScore } from "@/types/game";
+import { Game, GameCategoryTab, PlayerScore } from "@/types/games-data";
 
 export const GAMES: Game[] = [
   {
