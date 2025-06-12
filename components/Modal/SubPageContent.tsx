@@ -1,5 +1,5 @@
 import NumberAnimalSelector from "@/components/Buttons/NumberAnimalSelector";
-import Balance from "@/components/ui/Wallet/Balance";
+import Balance from "@/components/ui/Balance";
 import { data } from "@/constants/data";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";

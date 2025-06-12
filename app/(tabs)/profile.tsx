@@ -1,6 +1,6 @@
-import AccountDetails from "@/components/Profile/AccountDetails";
-import ToolCards from "@/components/Profile/ToolCards";
-import UserInfoCard from "@/components/Profile/UserInfoCard";
+import AccountDetails from "@/components/ui/AccountDetails";
+import ToolCards from "@/components/ui/ToolCards";
+import UserInfoCard from "@/components/ui/UserInfoCard";
 import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { StyleSheet, View } from "react-native";
 import { useTheme } from "react-native-paper";

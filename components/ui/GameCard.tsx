@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import { navigateToGameRoute } from "./utils/gameRoutes";
+import { navigateToGameRoute } from "../../utils/game-routes";
 
 interface GameCardProps {
   game: Game;

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 
-import BigSmallOddEvenButtonsGroup from "@/components/Buttons/BigSmallOddEvenPanel";
-import ButtonsGroup from "@/components/Buttons/ButtonsGroup";
+import BigSmallOddEvenButtonsGroup from "@/components/ui/BigSmallOddEvenPanel";
+import ButtonsGroup from "@/components/ui/ButtonsGroup";
 import { handleClear } from "@/features/BSOE-Panel/handleClear";
 import { handleSelectAll } from "@/features/BSOE-Panel/handleSelectAll";
 import { handleSelectBig } from "@/features/BSOE-Panel/handleSelectBig";
