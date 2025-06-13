@@ -1,47 +1,50 @@
-import Test from "@/components/__test__/Test";
-import { QuickButton } from "@/components/Buttons/QuickButton";
-import {
-  ButtonDefaultTextStyle,
-  selectedButtonStyle,
-} from "@/components/Buttons/utils/buttonGroupStyles";
-import React, { useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { useDailyCountdown } from "@/hooks/useCountdown";
+import React from "react";
+import { Modal, StyleSheet, Text, View } from "react-native";
 
-export default function HomeScreen() {
-  const [selectedButtons, setSelectedNumbers] = useState<number[]>([]);
-  const handleSelectNumber = (number: number) => {
-    if (selectedButtons.includes(number)) {
-      setSelectedNumbers(selectedButtons.filter((n) => n !== number));
-    } else {
-      setSelectedNumbers([...selectedButtons, number]);
-    }
-  };
-  const label = (i: number) => "鼠牛虎兔笼蛇马羊猴鸡狗猪"[i - 1]; // 假设按钮数量为 5，显示 A~E
-  const label1 = (i: number) => i.toString().padStart(2, "0"); // 假设按钮数量为 5，显示 01~05,保持两位数
-  const label3 = (i: number) => i.toString(); // 假设按钮数量为 5，显示 1~5
+export default function CountdownScreen() {
+  const { status, hours, minutes, seconds } = useDailyCountdown({
+    startTime: { hour: 15, minute: 20, second: 0 },
+    endTime: { hour: 15, minute: 25, second: 0 },
+  });
+
+  const format = (n: number) => n.toString().padStart(2, "0");
 
   return (
     <View style={styles.container}>
-      <QuickButton />
-      <Test
-        allSelected={false}
-        selectedButtons={selectedButtons}
-        onSelectButton={handleSelectNumber}
-        length={12}
-        displayInfo={label}
-        selectedButtonStyle={selectedButtonStyle}
-        ButtonDefaultTextStyle={ButtonDefaultTextStyle}
-        buttonDescription="48.8"
-      />
+      {status === "counting" ? (
+        <Text style={styles.text}>
+          距离 21:00 倒计时：{format(hours)}:{format(minutes)}:{format(seconds)}
+        </Text>
+      ) : (
+        <Modal visible={true} transparent animationType="fade">
+          <View style={styles.modalBackground}>
+            <View style={styles.modalBox}>
+              <Text style={styles.modalText}>已到 21:00，休息中...</Text>
+              <Text style={styles.modalText}>
+                距离下轮还有 {format(hours)}:{format(minutes)}:{format(seconds)}
+              </Text>
+            </View>
+          </View>
+        </Modal>
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  text: { fontSize: 24 },
+  modalBackground: {
     flex: 1,
+    backgroundColor: "#00000088",
     justifyContent: "center",
     alignItems: "center",
-    padding: 16,
   },
+  modalBox: {
+    backgroundColor: "white",
+    padding: 24,
+    borderRadius: 12,
+  },
+  modalText: { fontSize: 18, marginBottom: 8 },
 });
