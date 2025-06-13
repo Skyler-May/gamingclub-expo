@@ -11,11 +11,11 @@ import { handleSelectOdd } from "@/features/BSOE-Panel/handleSelectOdd";
 import { handleSelectSmall } from "@/features/BSOE-Panel/handleSelectSmall";
 import { toggleAnimalsPanel } from "@/features/BSOE-Panel/toggleAnimalsPanel";
 import { handleSelectAnimal } from "@/features/handleSelectAnimal ";
-import AnimalButtonsPanel from "./AnimalButtonsPanel";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,
-} from "./utils/buttonGroupStyles";
+} from "@/utils/buttonGroupStyles";
+import AnimalButtonsPanel from "./AnimalButtonsPanel";
 
 interface NumberAnimalSelectorProps {
   // 组件必要属性

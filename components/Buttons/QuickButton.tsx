@@ -10,7 +10,6 @@ import {
   View,
 } from "react-native";
 
-// ✅ 修改函数名为大写开头以符合 React 组件命名规范
 export function QuickButton() {
   const [selectedValues, setselectedValues] = useState("");
   const [defaultValues, setDefaultValues] = useState<number[]>([

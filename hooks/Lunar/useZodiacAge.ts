@@ -1,5 +1,5 @@
-import { setAnimalAgeMap } from "@/components/Buttons/utils/animalAgeMap"; // ✅ 新增：导入 set 方法
 import useLunar from "@/hooks/Lunar/useLunar";
+import { setAnimalAgeMap } from "@/utils/animalAgeMap"; // ✅ 新增：导入 set 方法
 
 // 生肖顺序
 const zodiacList = [

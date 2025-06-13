@@ -1,4 +1,4 @@
-import { getAnimalAgeMap } from "@/components/Buttons/utils/animalAgeMap";
+import { getAnimalAgeMap } from "@/utils/animalAgeMap";
 
 interface HandleSelectAnimalParams {
   selectedNumbers: number[];
