@@ -2,7 +2,7 @@ import CountdownTimer from "@/components/CountdownTimer";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
-import { MO_API_URL } from "@/constants/Mo-Api-Url";
+import { MO_API_URL } from "@/constants/moApiUrl";
 import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";

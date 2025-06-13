@@ -3,7 +3,7 @@ import {
   MO_API_URL,
   MOTHREE_API_URL,
   NEWMO_API_URL,
-} from "@/constants/Mo-Api-Url";
+} from "@/constants/moApiUrl";
 import { View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function HongKongScreen() {

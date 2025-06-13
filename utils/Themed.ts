@@ -15,7 +15,7 @@ import {
   lightPinkColors,
   lightRedColors,
   lightYellowColors,
-} from "@/constants/Colors";
+} from "@/constants/colors";
 import { MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 
 export const getTheme = (isDarkMode: boolean, currentTheme: string) => {

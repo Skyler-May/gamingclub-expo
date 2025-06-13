@@ -2,7 +2,7 @@ import {
   CHANNELS_DATA,
   PLATFORM_INFO,
   TOOLS_DATA,
-} from "@/constants/Profile-Data";
+} from "@/constants/profileCard";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";

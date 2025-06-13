@@ -1,5 +1,5 @@
+import Test from "@/components/__test__/Test";
 import { QuickButton } from "@/components/Buttons/QuickButton";
-import Test from "@/components/Buttons/test/Test";
 import {
   ButtonDefaultTextStyle,
   selectedButtonStyle,

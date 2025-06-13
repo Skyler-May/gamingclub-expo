@@ -1,4 +1,4 @@
-import { DAY, LUNAR_INFO, MONTH, ZODIACS } from "./Lunar-Data";
+import { DAY, LUNAR_INFO, MONTH, ZODIACS } from "@/constants/lunarData";
 import useCurrentDateTime from "./useSolar";
 
 // 农历日期接口
