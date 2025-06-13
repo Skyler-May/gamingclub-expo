@@ -1,4 +1,3 @@
-import CountdownTimer from "@/components/CountdownTimer";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
@@ -48,7 +47,7 @@ export default function MacauScreen() {
         {/* 倒计时 */}
         <View
           style={{
-            // backgroundColor: "#ccc",
+            backgroundColor: "#ccc",
             width: "35%",
             justifyContent: "center",
             alignItems: "center",
@@ -62,10 +61,6 @@ export default function MacauScreen() {
               return num + 1;
             }}
           />
-          <Text>
-            <CountdownTimer sleepStartTime={"23:10"} sleepEndTime={"08:00"} />
-          </Text>
-          <Text style={{ color: theme.colors.primary }}>余额：888888</Text>
         </View>
       </View>
 
