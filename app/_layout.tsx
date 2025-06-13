@@ -102,7 +102,7 @@ function RootLayoutNav({
         options={{ title: "模态（测试）", presentation: "modal" }}
       />
       <Stack.Screen
-        name="hongkong"
+        name="hong-kong"
         options={{
           title: "香港",
           headerRight: () => (
@@ -134,7 +134,7 @@ function RootLayoutNav({
         }}
       />
       <Stack.Screen
-        name="newmacau"
+        name="new-macau"
         options={{
           title: "新澳门",
           headerRight: () => (
@@ -150,7 +150,7 @@ function RootLayoutNav({
         }}
       />
       <Stack.Screen
-        name="taiwan"
+        name="tai-wan"
         options={{
           title: "台湾",
           headerRight: () => (

@@ -2,8 +2,9 @@ import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { MO_API_URL } from "@/constants/moApiUrl";
+import { useDailyCountdown } from "@/hooks/useCountdown";
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function MacauScreen() {
   const theme = useTheme();
@@ -12,6 +13,13 @@ export default function MacauScreen() {
   const handlePageSelect = (pageId: number) => {
     setCurrentPage(pageId);
   };
+
+  const { status, hours, minutes, seconds } = useDailyCountdown({
+    startTime: { hour: 16, minute: 41, second: 0 },
+    endTime: { hour: 16, minute: 0, second: 0 },
+  });
+
+  const format = (n: number) => n.toString().padStart(2, "0");
 
   return (
     <View
@@ -47,20 +55,40 @@ export default function MacauScreen() {
         {/* 倒计时 */}
         <View
           style={{
-            backgroundColor: "#ccc",
+            // backgroundColor: "#ccc",
             width: "35%",
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            gap: 10,
           }}
         >
-          <GetLotteryResults
-            apiUrl={MO_API_URL}
-            calculateExpect={(expect) => {
-              const num = parseInt(expect);
-              return num + 1;
-            }}
-          />
+          <View>
+            <GetLotteryResults
+              apiUrl={MO_API_URL}
+              calculateExpect={(expect) => {
+                const num = parseInt(expect);
+                return num + 1;
+              }}
+            />
+          </View>
+          {status === "counting" ? (
+            <Text style={styles.text}>
+              ⏰ {format(hours)}:{format(minutes)}:{format(seconds)}
+            </Text>
+          ) : (
+            <Modal visible={true} transparent animationType="fade">
+              <View style={styles.modalBackground}>
+                <View style={styles.modalBox}>
+                  <Text style={styles.modalText}>已到 21:00，休息中...</Text>
+                  <Text style={styles.modalText}>
+                    距离下轮还有 {format(hours)}:{format(minutes)}:
+                    {format(seconds)}
+                  </Text>
+                </View>
+              </View>
+            </Modal>
+          )}
         </View>
       </View>
 
@@ -138,4 +166,22 @@ const styles = StyleSheet.create({
   subPageContainer: {
     flex: 1,
   },
+  // 倒计时样式
+  text: {
+    fontSize: 16,
+    color: "tomato",
+    fontWeight: "bold",
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "#00000088",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalBox: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 12,
+  },
+  modalText: { fontSize: 18, marginBottom: 8 },
 });

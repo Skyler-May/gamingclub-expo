@@ -33,8 +33,14 @@ export default function CountdownScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, justifyContent: "center", alignItems: "center" },
-  text: { fontSize: 24 },
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontSize: 24,
+  },
   modalBackground: {
     flex: 1,
     backgroundColor: "#00000088",
