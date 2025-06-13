@@ -1,4 +1,4 @@
-import { modalPages, PageData } from "@/types/modal-subPages";
+import { modalPages, PageData } from "@/types/modalSubPages";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
