@@ -38,7 +38,7 @@ const GameLobbyScreen: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<
     GameCategory | "all"
   >("all");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery] = useState("");
 
   const filteredGames = GAMES.filter(
     (game: { category: string; title: string; description: string }) => {
