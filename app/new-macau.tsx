@@ -1,10 +1,10 @@
-import CountdownTimer from "@/components/CountdownTimer";
 import OpenModal from "@/components/Modal/OpenModal";
 import SubPageContent from "@/components/Modal/SubPageContent";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { NEWMO_API_URL } from "@/constants/moApiUrl";
+import { useDailyCountdown } from "@/hooks/useCountdown";
 import { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function NewMacauScreen() {
   const theme = useTheme();
@@ -13,6 +13,13 @@ export default function NewMacauScreen() {
   const handlePageSelect = (pageId: number) => {
     setCurrentPage(pageId);
   };
+
+  const { status, hours, minutes, seconds } = useDailyCountdown({
+    startTime: { hour: 16, minute: 41, second: 0 },
+    endTime: { hour: 16, minute: 0, second: 0 },
+  });
+
+  const format = (n: number) => n.toString().padStart(2, "0");
 
   return (
     <View
@@ -53,6 +60,7 @@ export default function NewMacauScreen() {
             justifyContent: "center",
             alignItems: "center",
             flexDirection: "column",
+            gap: 10,
           }}
         >
           <GetLotteryResults
@@ -62,10 +70,23 @@ export default function NewMacauScreen() {
               return num + 1;
             }}
           />
-          <Text>
-            <CountdownTimer sleepStartTime={"23:10"} sleepEndTime={"08:00"} />
-          </Text>
-          <Text style={{ color: theme.colors.primary }}>余额：888888</Text>
+          {status === "counting" ? (
+            <Text style={styles.text}>
+              ⏰ {format(hours)}:{format(minutes)}:{format(seconds)}
+            </Text>
+          ) : (
+            <Modal visible={true} transparent animationType="fade">
+              <View style={styles.modalBackground}>
+                <View style={styles.modalBox}>
+                  <Text style={styles.modalText}>已到 21:00，休息中...</Text>
+                  <Text style={styles.modalText}>
+                    距离下轮还有 {format(hours)}:{format(minutes)}:
+                    {format(seconds)}
+                  </Text>
+                </View>
+              </View>
+            </Modal>
+          )}
         </View>
       </View>
 
@@ -155,5 +176,27 @@ const styles = StyleSheet.create({
   },
   subPageContainer: {
     flex: 1,
+  },
+
+  // 倒计时样式
+  text: {
+    fontSize: 16,
+    color: "tomato",
+    fontWeight: "bold",
+  },
+  modalBackground: {
+    flex: 1,
+    backgroundColor: "#00000088",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalBox: {
+    backgroundColor: "white",
+    padding: 16,
+    borderRadius: 12,
+  },
+  modalText: {
+    fontSize: 18,
+    marginBottom: 8,
   },
 });

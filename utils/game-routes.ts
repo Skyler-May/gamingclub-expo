@@ -4,10 +4,10 @@ import { router } from "expo-router";
  * 游戏类型到路由的映射
  */
 export const gameTypeToRouteMap = {
-  hk: "/hongkong",
+  hk: "/hong-kong",
   mo: "/macau",
-  newmo: "/newmacau",
-  tw: "/taiwan",
+  newmo: "/new-macau",
+  tw: "/tai-wan",
 };
 
 /**
