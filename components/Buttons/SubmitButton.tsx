@@ -1,3 +1,4 @@
+import { QuickButton } from "@/components/QuickButton";
 import { AntDesign } from "@expo/vector-icons";
 import {
   StyleSheet,
@@ -7,7 +8,6 @@ import {
   View,
 } from "react-native";
 import { Badge } from "react-native-paper";
-import { QuickButton } from "./QuickButton";
 
 export default function SubmitButton() {
   return (
@@ -54,7 +54,7 @@ export default function SubmitButton() {
 
 const styles = StyleSheet.create({
   container: {
-    //backgroundColor: "#663399", // 紫色背景颜色 #663399
+    // backgroundColor: "#663399", // 紫色背景颜色 #663399
     height: 100,
     width: "100%",
     justifyContent: "center",

@@ -1,3 +1,4 @@
+import { QuickButton } from "@/components/QuickButton";
 import { useDailyCountdown } from "@/hooks/useCountdown";
 import React from "react";
 import { Modal, StyleSheet, Text, View } from "react-native";
@@ -28,6 +29,7 @@ export default function CountdownScreen() {
           </View>
         </Modal>
       )}
+      <QuickButton />
     </View>
   );
 }

@@ -1,4 +1,5 @@
 import { useLotteryResults } from "@/hooks/useMoLotteryResults";
+import { LotteryResultDisplayOptions } from "@/types/moApiTypes";
 import React from "react";
 import {
   ActivityIndicator,
@@ -7,7 +8,6 @@ import {
   Text,
   View,
 } from "react-native";
-import { LotteryResultDisplayOptions } from "../../types/moApiTypes";
 
 const GetLotteryResults: React.FC<LotteryResultDisplayOptions> = ({
   apiUrl,
