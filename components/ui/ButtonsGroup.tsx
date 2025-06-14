@@ -19,6 +19,11 @@ interface ButtonsGroupProps {
   buttonDescription?: string; //  按钮描述
   selectedButtonStyle?: (index: number, isSelected: boolean) => object; //  按钮样式
   ButtonDefaultTextStyle?: (index: number, isSelected: boolean) => TextStyle; //  按钮默认文本样式
+
+  // 插槽
+  children?: React.ReactNode; //  自定义插槽
+  headerSlot?: React.ReactNode; //  头部插槽
+  footerSlot?: React.ReactNode; //  底部插槽
 }
 
 export default function ButtonsGroup({
@@ -32,6 +37,9 @@ export default function ButtonsGroup({
   buttonDescription,
   selectedButtonStyle,
   ButtonDefaultTextStyle,
+  children,
+  headerSlot,
+  footerSlot,
 }: ButtonsGroupProps) {
   // 使用自定义Hook处理网格布局
   const { buttonWidth, handleLayout, containerWidth } = useButtonGroupLayout();
@@ -81,9 +89,12 @@ export default function ButtonsGroup({
 
   return (
     <ScrollView showsVerticalScrollIndicator={false} style={styles.scrollView}>
+      {headerSlot}
+      {children}
       <View style={styles.buttonGroup} onLayout={handleLayout}>
         {containerWidth > 0 && renderButtonsGroup()}
       </View>
+      {footerSlot}
     </ScrollView>
   );
 }
