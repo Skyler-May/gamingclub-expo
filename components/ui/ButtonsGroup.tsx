@@ -9,18 +9,16 @@ import {
 } from "react-native";
 
 interface ButtonsGroupProps {
-  // 必要属性
-  length: number;
-  selectedButtons: number[];
-  onSelectButton: (number: number) => void;
-  // 可选属性
-  allSelected?: boolean;
-  onSelectAll?: () => void;
-  onClear?: () => void;
-  displayInfo?: (index: number) => string;
-  buttonDescription?: string;
-  selectedButtonStyle?: (index: number, isSelected: boolean) => object;
-  ButtonDefaultTextStyle?: (index: number, isSelected: boolean) => TextStyle;
+  length: number; //  按钮数量
+  selectedButtons: number[]; //  已选按钮
+  onSelectButton: (number: number) => void; //  选择按钮的回调
+  allSelected?: boolean; //  是否全选
+  onSelectAll?: () => void; //  全选的回调
+  onClear?: () => void; //  清除的回调
+  displayInfo?: (index: number) => string; //  按钮描述
+  buttonDescription?: string; //  按钮描述
+  selectedButtonStyle?: (index: number, isSelected: boolean) => object; //  按钮样式
+  ButtonDefaultTextStyle?: (index: number, isSelected: boolean) => TextStyle; //  按钮默认文本样式
 }
 
 export default function ButtonsGroup({
