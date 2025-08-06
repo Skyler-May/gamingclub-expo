@@ -1,6 +1,9 @@
-import { Ionicons } from "@expo/vector-icons/";
-import { Link, Tabs } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { DrawerActions } from "@react-navigation/native";
+import { Link, Tabs, useNavigation } from "expo-router";
 import { Pressable, TouchableOpacity } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "react-native-paper";
 
 type TabBarIconProps = {
@@ -9,6 +12,7 @@ type TabBarIconProps = {
   size?: number;
 };
 
+const Drawer = createDrawerNavigator();
 function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
   return (
     <Ionicons
@@ -20,8 +24,9 @@ function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
   );
 }
 
-export default function TabsLayout() {
+function TabsLayout() {
   const theme = useTheme();
+  const navigation = useNavigation();
 
   return (
     <Tabs
@@ -34,6 +39,17 @@ export default function TabsLayout() {
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
         headerTintColor: theme.colors.onSurface,
+        headerLeft: () => (
+          <Pressable
+            onPress={() => {
+              // 打开 drawer
+              navigation.dispatch(DrawerActions.openDrawer());
+            }}
+            style={{ paddingLeft: 20 }}
+          >
+            <Ionicons name="menu" size={24} color={theme.colors.onSurface} />
+          </Pressable>
+        ),
       }}
     >
       <Tabs.Screen
@@ -135,5 +151,34 @@ export default function TabsLayout() {
         }}
       />
     </Tabs>
+  );
+}
+
+export default function TabsWithDrawer() {
+  const theme = useTheme();
+
+  return (
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Drawer.Navigator
+        screenOptions={{
+          drawerStyle: {
+            backgroundColor: theme.colors.elevation.level3,
+            // width: 240,
+          },
+          drawerActiveTintColor: theme.colors.primary,
+          drawerInactiveTintColor: theme.colors.onSurfaceVariant,
+          headerShown: false,
+        }}
+      >
+        <Drawer.Screen
+          name="tabs"
+          options={{
+            drawerLabel: "Main Tabs",
+          }}
+          component={TabsLayout}
+        />
+        {/* 可添加更多 Drawer 页面 */}
+      </Drawer.Navigator>
+    </GestureHandlerRootView>
   );
 }
