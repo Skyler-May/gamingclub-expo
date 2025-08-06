@@ -154,7 +154,7 @@ function TabsLayout() {
   );
 }
 
-export default function TabsWithDrawer() {
+export default function DrawerLayout() {
   const theme = useTheme();
 
   return (
@@ -172,10 +172,11 @@ export default function TabsWithDrawer() {
       >
         <Drawer.Screen
           name="tabs"
-          options={{
-            drawerLabel: "Main Tabs",
-          }}
           component={TabsLayout}
+          options={{
+            drawerLabel: () => null,
+            drawerItemStyle: { height: 0 },
+          }}
         />
         {/* 可添加更多 Drawer 页面 */}
       </Drawer.Navigator>
