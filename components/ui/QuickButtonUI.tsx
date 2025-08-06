@@ -1,4 +1,4 @@
-import { AntDesign } from "@expo/vector-icons";
+import { Feather, Ionicons } from "@expo/vector-icons";
 import React from "react";
 import {
   Modal,
@@ -51,17 +51,14 @@ export function QuickButtonUI(props: {
         </TouchableOpacity>
       ))}
       <TouchableOpacity onPress={onEditPress} style={styles.iconButton}>
-        <AntDesign name="edit" size={20} color="blue" />
+        <Feather name="edit" size={24} color="gray" />
       </TouchableOpacity>
 
       <Modal visible={isModalVisible} animationType="slide" transparent>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <TouchableOpacity
-              onPress={onModalClose}
-              style={styles.modalCloseButton}
-            >
-              <AntDesign name="closecircleo" size={24} color="red" />
+            <TouchableOpacity onPress={onModalClose} style={styles.modalClose}>
+              <Ionicons name="close-circle-outline" size={24} color="red" />
             </TouchableOpacity>
             <Text style={styles.modalTitle}>
               编辑快捷金额：
@@ -131,11 +128,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     width: "80%",
-    padding: 20,
+    padding: 10,
     backgroundColor: "white",
     borderRadius: 10,
   },
-  modalCloseButton: {
+  modalClose: {
     alignSelf: "flex-end",
   },
   modalSaveButton: {

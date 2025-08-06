@@ -3,11 +3,14 @@ import SubPageContent from "@/components/Modal/SubPageContent";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { MO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";
-import { useState } from "react";
+import Ionicons from "@expo/vector-icons/build/Ionicons";
+import { router } from "expo-router";
+import { useEffect, useState } from "react";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function MacauScreen() {
   const theme = useTheme();
+  const [isModal, setIsModal] = useState(false);
   const [currentPage, setCurrentPage] = useState<number>(1); // 设置默认页面为第一个页面
   // 处理页面选择
   const handlePageSelect = (pageId: number) => {
@@ -15,9 +18,15 @@ export default function MacauScreen() {
   };
 
   const { status, hours, minutes, seconds } = useDailyCountdown({
-    startTime: { hour: 16, minute: 41, second: 0 },
-    endTime: { hour: 16, minute: 0, second: 0 },
+    startTime: { hour: 21, minute: 15, second: 0 },
+    endTime: { hour: 21, minute: 35, second: 0 },
   });
+
+  useEffect(() => {
+    if (status !== "counting") {
+      setIsModal(true);
+    }
+  }, [status]);
 
   const format = (n: number) => n.toString().padStart(2, "0");
 
@@ -77,10 +86,23 @@ export default function MacauScreen() {
               ⏰ {format(hours)}:{format(minutes)}:{format(seconds)}
             </Text>
           ) : (
-            <Modal visible={true} transparent animationType="fade">
+            <Modal visible={isModal} transparent animationType="fade">
               <View style={styles.modalBackground}>
                 <View style={styles.modalBox}>
-                  <Text style={styles.modalText}>已到 21:00，休息中...</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setIsModal(false);
+                      router.back();
+                    }}
+                    style={styles.modalClose}
+                  >
+                    <Ionicons
+                      name="close-circle-outline"
+                      size={24}
+                      color="red"
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.modalText}>已到 21:15，休息中...</Text>
                   <Text style={styles.modalText}>
                     距离下轮还有 {format(hours)}:{format(minutes)}:
                     {format(seconds)}
@@ -174,7 +196,7 @@ const styles = StyleSheet.create({
   },
   modalBackground: {
     flex: 1,
-    backgroundColor: "#00000088",
+    backgroundColor: "#000000aa",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -182,9 +204,19 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     padding: 16,
     borderRadius: 12,
+    width: "80%",
+    height: 150,
+    justifyContent: "center",
+    alignItems: "center",
   },
   modalText: {
-    fontSize: 18,
+    fontSize: 14,
     marginBottom: 8,
+  },
+  modalClose: {
+    //绝对定位到右上角
+    position: "absolute",
+    right: 10,
+    top: 10,
   },
 });
