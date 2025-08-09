@@ -7,11 +7,11 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import CustomModal from "./MultiPageModal";
+import GameplayGrid from "./GameplayGrid";
 
 // 使用从pageData导入的PageData接口
 
-interface OpenModalProps {
+interface GameplayToggleProps {
   buttonTitle?: string;
   modalTitle?: string;
   pages?: PageData[];
@@ -21,7 +21,7 @@ interface OpenModalProps {
   renderContent?: (currentPage: number | null) => React.ReactNode;
 }
 
-const OpenModal: React.FC<OpenModalProps> = ({
+const GameplayToggle: React.FC<GameplayToggleProps> = ({
   buttonTitle = "打开模态",
   modalTitle = "模态标题",
   pages = modalPages, // 默认使用导入的modalPages
@@ -98,8 +98,7 @@ const OpenModal: React.FC<OpenModalProps> = ({
       >
         <Text style={styles.buttonText}>{currentButtonTitle}</Text>
       </TouchableOpacity>
-
-      <CustomModal
+      <GameplayGrid
         visible={visible}
         hideModal={hideModal}
         title={modalTitle}
@@ -112,4 +111,4 @@ const OpenModal: React.FC<OpenModalProps> = ({
   );
 };
 
-export default OpenModal;
+export default GameplayToggle;

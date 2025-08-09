@@ -1,5 +1,5 @@
-import OpenModal from "@/components/Modal/OpenModal";
-import SubPageContent from "@/components/Modal/SubPageContent";
+import SubPageContent from "@/components/Gameplay/GameplayContent";
+import OpenModal from "@/components/Gameplay/GameplayToggle";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { NEWMO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";

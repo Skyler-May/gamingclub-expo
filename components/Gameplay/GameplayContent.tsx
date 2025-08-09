@@ -3,17 +3,19 @@ import Balance from "@/components/ui/Balance";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-interface SubPageContentProps {
-  currentPage: number | null;
+interface GameplayContentProps {
+  currentGameplay: number | null;
 }
 
-const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
+const GameplayContent: React.FC<GameplayContentProps> = ({
+  currentGameplay,
+}) => {
   // 直接使用switch语句，不再检查null值
-  switch (currentPage) {
+  switch (currentGameplay) {
     case 1:
       return (
-        <View style={styles.subPage}>
-          {/* <Text style={styles.pageTitle}>A 页面内容</Text>
+        <View style={styles.Gameplay}>
+          {/* <Text style={styles.Title}>A 页面内容</Text>
           <Text>这是 A 页面的详细内容</Text> */}
           <NumberAnimalSelector
             buttonDescription="48.8"
@@ -26,37 +28,37 @@ const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
       );
     case 2:
       return (
-        <View style={styles.subPage}>
-          <Text style={styles.pageTitle}>B 页面内容</Text>
+        <View style={styles.Gameplay}>
+          <Text style={styles.Title}>B 页面内容</Text>
           <Text>这是 B 页面的详细内容</Text>
           <Balance />
         </View>
       );
     case 3:
       return (
-        <View style={styles.subPage}>
-          <Text style={styles.pageTitle}>C 页面内容</Text>
+        <View style={styles.Gameplay}>
+          <Text style={styles.Title}>C 页面内容</Text>
           <Text>这是 C 页面的详细内容</Text>
         </View>
       );
     case 4:
       return (
-        <View style={styles.subPage}>
-          <Text style={styles.pageTitle}>D 页面内容</Text>
+        <View style={styles.Gameplay}>
+          <Text style={styles.Title}>D 页面内容</Text>
           <Text>这是 D 页面的详细内容</Text>
         </View>
       );
     case 5:
       return (
-        <View style={styles.subPage}>
-          <Text style={styles.pageTitle}>E 页面内容</Text>
+        <View style={styles.Gameplay}>
+          <Text style={styles.Title}>E 页面内容</Text>
           <Text>这是 E 页面的详细内容</Text>
         </View>
       );
     case 6:
       return (
-        <View style={styles.subPage}>
-          <Text style={styles.pageTitle}>F 页面内容</Text>
+        <View style={styles.Gameplay}>
+          <Text style={styles.Title}>F 页面内容</Text>
           <Text>这是 F 页面的详细内容</Text>
         </View>
       );
@@ -70,10 +72,10 @@ const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
 };
 
 const styles = StyleSheet.create({
-  subPage: {
+  Gameplay: {
     flex: 1,
   },
-  pageTitle: {
+  Title: {
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
@@ -89,4 +91,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SubPageContent;
+export default GameplayContent;

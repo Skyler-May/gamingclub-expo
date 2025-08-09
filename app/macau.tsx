@@ -1,5 +1,5 @@
-import OpenModal from "@/components/Modal/OpenModal";
-import SubPageContent from "@/components/Modal/SubPageContent";
+import GameplayContent from "@/components/Gameplay/GameplayContent";
+import GameplayToggle from "@/components/Gameplay/GameplayToggle";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { MO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";
@@ -131,7 +131,7 @@ export default function MacauScreen() {
           >
             <Text style={{ color: theme.colors.primary }}>打开模态1</Text>
           </TouchableOpacity>
-          <OpenModal
+          <GameplayToggle
             buttonTitle="打开模态"
             modalTitle="模态标题"
             itemsPerRow={4}
@@ -156,7 +156,7 @@ export default function MacauScreen() {
 
         {/* 渲染模态子页面 */}
         <View style={styles.subPageContainer}>
-          <SubPageContent currentPage={currentPage} />
+          <GameplayContent currentGameplay={currentPage} />
         </View>
       </View>
     </View>
