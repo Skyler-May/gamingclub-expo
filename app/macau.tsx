@@ -11,10 +11,10 @@ import { useTheme } from "react-native-paper";
 export default function MacauScreen() {
   const theme = useTheme();
   const [isModal, setIsModal] = useState(false);
-  const [currentPage, setCurrentPage] = useState<number>(1); // 设置默认页面为第一个页面
+  const [currentGameplay, setCurrentGameplay] = useState<number>(1); // 设置默认玩法为第一个玩法
   // 处理页面选择
   const handlePageSelect = (pageId: number) => {
-    setCurrentPage(pageId);
+    setCurrentGameplay(pageId);
   };
 
   const { status, hours, minutes, seconds } = useDailyCountdown({
@@ -156,7 +156,7 @@ export default function MacauScreen() {
 
         {/* 渲染模态子页面 */}
         <View style={styles.subPageContainer}>
-          <GameplayContent currentGameplay={currentPage} />
+          <GameplayContent currentGameplay={currentGameplay} />
         </View>
       </View>
     </View>

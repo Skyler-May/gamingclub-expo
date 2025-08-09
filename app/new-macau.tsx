@@ -1,5 +1,5 @@
 import SubPageContent from "@/components/Gameplay/GameplayContent";
-import OpenModal from "@/components/Gameplay/GameplayToggle";
+import { GameplayToggle } from "@/components/Gameplay/GameplayToggle";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { NEWMO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";
@@ -8,10 +8,10 @@ import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 export default function NewMacauScreen() {
   const theme = useTheme();
-  const [currentPage, setCurrentPage] = useState<number>(1); // 设置默认页面为第一个页面
+  const [currentGameplay, setCurrentGameplay] = useState<number>(1); // 设置默认页面为第一个页面
   // 处理页面选择
   const handlePageSelect = (pageId: number) => {
-    setCurrentPage(pageId);
+    setCurrentGameplay(pageId);
   };
 
   const { status, hours, minutes, seconds } = useDailyCountdown({
@@ -107,7 +107,7 @@ export default function NewMacauScreen() {
           >
             <Text style={{ color: theme.colors.primary }}>打开模态1</Text>
           </TouchableOpacity>
-          <OpenModal
+          <GameplayToggle
             buttonTitle="打开模态"
             modalTitle="模态标题"
             itemsPerRow={4}
@@ -132,7 +132,7 @@ export default function NewMacauScreen() {
 
         {/* 渲染模态子页面 */}
         <View style={styles.subPageContainer}>
-          <SubPageContent currentPage={currentPage} />
+          <SubPageContent currentGameplay={currentGameplay} />
         </View>
       </View>
     </View>
