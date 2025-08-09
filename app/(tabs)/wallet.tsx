@@ -6,6 +6,11 @@ import { useTheme } from "react-native-paper";
 
 export default function WalletScreen() {
   const theme = useTheme();
+  const balance = {
+    amount: 589650.86,
+    currency: "USD",
+    currencySymbol: "$",
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
@@ -15,7 +20,7 @@ export default function WalletScreen() {
           backgroundColor: theme.colors.elevation.level0,
         }}
       >
-        <Balance />
+        <Balance balance={balance} />
         <ThirdPartyAccounts />
         <BankCards />
       </View>

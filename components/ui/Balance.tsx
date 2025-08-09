@@ -3,14 +3,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 
 interface BalanceProps {
-  balance?: number;
+  balance?: { amount: number; currency: string; currencySymbol: string };
   onDeposit?: () => void;
   onWithdraw?: () => void;
   onTransfer?: () => void;
 }
 
 export default function Balance({
-  balance = 0,
+  balance = { amount: 0, currency: "USD", currencySymbol: "$" },
   onDeposit,
   onWithdraw,
   onTransfer,
@@ -38,7 +38,7 @@ export default function Balance({
       marginBottom: 8,
     },
     balanceAmount: {
-      fontSize: 26,
+      fontSize: 24,
       fontWeight: "bold",
       color: theme.colors.surface,
     },
@@ -73,7 +73,9 @@ export default function Balance({
     <View style={styles.container}>
       <View style={styles.balanceContainer}>
         <Text style={styles.balanceLabel}>账户余额</Text>
-        <Text style={styles.balanceAmount}>¥ {balance.toFixed(2)}</Text>
+        <Text style={styles.balanceAmount}>
+          {balance.currencySymbol} {balance.amount.toFixed(2)}
+        </Text>
       </View>
       <View style={styles.actionsContainer}>
         <TouchableOpacity style={styles.actionButton} onPress={onDeposit}>
