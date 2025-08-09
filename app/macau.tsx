@@ -1,5 +1,5 @@
-import GameplayContent from "@/components/Gameplay/GameplayContent";
-import { GameplayToggle } from "@/components/Gameplay/GameplayToggle";
+import GameplayContent from "@/components/AppGameplayOptions";
+import { GameplayToggle } from "@/components/ui/GameplayToggle";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { MO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";

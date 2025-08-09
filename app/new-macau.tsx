@@ -1,5 +1,5 @@
-import SubPageContent from "@/components/Gameplay/GameplayContent";
-import { GameplayToggle } from "@/components/Gameplay/GameplayToggle";
+import SubPageContent from "@/components/AppGameplayOptions";
+import { GameplayToggle } from "@/components/ui/GameplayToggle";
 import GetLotteryResults from "@/components/ui/GetLotteryResults";
 import { NEWMO_API_URL } from "@/constants/moApiUrl";
 import { useDailyCountdown } from "@/hooks/useCountdown";
