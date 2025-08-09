@@ -12,9 +12,9 @@ export default function MacauScreen() {
   const theme = useTheme();
   const [isModal, setIsModal] = useState(false);
   const [currentGameplay, setCurrentGameplay] = useState<number>(1); // 设置默认玩法为第一个玩法
-  // 处理页面选择
-  const handlePageSelect = (pageId: number) => {
-    setCurrentGameplay(pageId);
+  // 处理玩法选择
+  const handleGamePlaySelect = (gamePlayId: number) => {
+    setCurrentGameplay(gamePlayId);
   };
 
   const { status, hours, minutes, seconds } = useDailyCountdown({
@@ -133,9 +133,9 @@ export default function MacauScreen() {
           </TouchableOpacity>
           <GameplayToggle
             buttonTitle="打开模态"
-            modalTitle="模态标题"
+            gamePlayTitle="模态标题"
             itemsPerRow={4}
-            onPageSelect={handlePageSelect}
+            onGamePlaySelect={handleGamePlaySelect}
           />
           <TouchableOpacity
             style={{

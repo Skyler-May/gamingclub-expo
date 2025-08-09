@@ -13,7 +13,7 @@ interface GameplayProps {
   hideModal: () => void;
   title?: string;
   children?: React.ReactNode;
-  pages?: GameplayButtonProps[];
+  gamePlays?: GameplayButtonProps[];
   itemsPerRow?: number;
 }
 
@@ -22,16 +22,16 @@ function GameplayGrid({
   hideModal,
   title,
   children,
-  pages,
+  gamePlays,
   itemsPerRow = 4,
 }: GameplayProps) {
-  const renderPages = () => {
-    if (!pages) return children;
+  const renderPlays = () => {
+    if (!gamePlays) return children;
 
-    const rowCount = Math.ceil(pages.length / itemsPerRow);
+    const rowCount = Math.ceil(gamePlays.length / itemsPerRow);
 
     const rows = Array.from({ length: rowCount }, (_, rowIndex) => {
-      const rowButtons = pages.slice(
+      const rowButtons = gamePlays.slice(
         rowIndex * itemsPerRow,
         (rowIndex + 1) * itemsPerRow
       );
@@ -76,7 +76,7 @@ function GameplayGrid({
         contentContainerStyle={styles.containerStyle}
       >
         {title && <Text style={styles.title}>{title}</Text>}
-        {renderPages()}
+        {renderPlays()}
         <Button mode="contained" onPress={hideModal} style={styles.closeButton}>
           关闭
         </Button>

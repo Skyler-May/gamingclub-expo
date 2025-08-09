@@ -1,4 +1,4 @@
-import { modalPages, PageData } from "@/types/modalSubPages";
+import { GamePlayData, gamePlayModes } from "@/types/game-play";
 import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
@@ -9,68 +9,68 @@ import {
 import { useTheme } from "react-native-paper";
 import { GameplayGrid } from "./GameplayGrid";
 
-// 使用从pageData导入的PageData接口
-
 interface GameplayToggleProps {
   buttonTitle?: string;
-  modalTitle?: string;
-  pages?: PageData[];
+  gamePlayTitle?: string;
+  gamePlays?: GamePlayData[];
   itemsPerRow?: number;
   buttonProps?: Omit<TouchableOpacityProps, "onPress">;
-  onPageSelect?: (pageId: number) => void;
-  renderContent?: (currentPage: number | null) => React.ReactNode;
+  onGamePlaySelect?: (gamePlayId: number) => void;
+  renderContent?: (currentGamePlay: number | null) => React.ReactNode;
 }
 
 function GameplayToggle({
   buttonTitle = "打开模态",
-  modalTitle = "模态标题",
-  pages = modalPages, // 默认使用导入的modalPages
+  gamePlayTitle = "模态标题",
+  gamePlays = gamePlayModes, // 默认使用导入的gamePlayModes
   itemsPerRow = 4,
   buttonProps,
-  onPageSelect,
+  onGamePlaySelect,
   renderContent,
 }: GameplayToggleProps) {
   const [visible, setVisible] = useState(false);
-  const [currentPage, setCurrentPage] = useState<number | null>(null);
+  const [currentGamePlay, setCurrentGamePlay] = useState<number | null>(null);
   const [currentButtonTitle, setCurrentButtonTitle] = useState(buttonTitle);
   const theme = useTheme();
 
-  // 根据当前页面ID更新按钮标题
+  // 根据当前玩法ID更新按钮标题
   useEffect(() => {
-    // 初始化时，如果有传入的currentPage，则使用它
-    if (onPageSelect && currentPage === null) {
-      // 查找第一个页面作为默认页面
-      if (pages.length > 0) {
-        const defaultPage = pages[0];
-        setCurrentPage(defaultPage.id);
-        setCurrentButtonTitle(`页面：${defaultPage.title}`);
+    // 初始化时，如果有传入的currentGamePlay，则使用它
+    if (onGamePlaySelect && currentGamePlay === null) {
+      // 查找第一个玩法作为默认玩法
+      if (gamePlays.length > 0) {
+        const defaultGamePlay = gamePlays[0];
+        setCurrentGamePlay(defaultGamePlay.id);
+        setCurrentButtonTitle(`玩法：${defaultGamePlay.title}`);
       }
-    } else if (currentPage === null) {
+    } else if (currentGamePlay === null) {
       setCurrentButtonTitle(buttonTitle);
     } else {
-      const selectedPage = pages.find((page) => page.id === currentPage);
-      if (selectedPage) {
-        setCurrentButtonTitle(`页面：${selectedPage.title}`);
+      const selectedGamePlay = gamePlays.find(
+        (gamePlay) => gamePlay.id === currentGamePlay
+      );
+      if (selectedGamePlay) {
+        setCurrentButtonTitle(`玩法：${selectedGamePlay.title}`);
       }
     }
-  }, [currentPage, pages, buttonTitle, onPageSelect]);
+  }, [currentGamePlay, gamePlays, buttonTitle, onGamePlaySelect]);
 
   const showModal = () => setVisible(true);
   const hideModal = () => setVisible(false);
 
-  // 处理页面选择
-  const handlePageSelect = (pageId: number) => {
-    setCurrentPage(pageId);
+  // 处理玩法选择
+  const handleGamePlaySelect = (gamePlayId: number) => {
+    setCurrentGamePlay(gamePlayId);
     hideModal();
-    if (onPageSelect) {
-      onPageSelect(pageId);
+    if (onGamePlaySelect) {
+      onGamePlaySelect(gamePlayId);
     }
   };
 
-  // 处理页面数据
-  const processedPages = pages.map((page) => ({
-    ...page,
-    onPress: () => handlePageSelect(page.id),
+  // 处理玩法数据
+  const processedGamePlays = gamePlays.map((gamePlay) => ({
+    ...gamePlay,
+    onPress: () => handleGamePlaySelect(gamePlay.id),
   }));
 
   const styles = StyleSheet.create({
@@ -102,12 +102,14 @@ function GameplayToggle({
       <GameplayGrid
         visible={visible}
         hideModal={hideModal}
-        title={modalTitle}
-        pages={processedPages}
+        title={gamePlayTitle}
+        gamePlays={processedGamePlays}
         itemsPerRow={itemsPerRow}
       />
 
-      {renderContent && currentPage !== null && renderContent(currentPage)}
+      {renderContent &&
+        currentGamePlay !== null &&
+        renderContent(currentGamePlay)}
     </>
   );
 }
