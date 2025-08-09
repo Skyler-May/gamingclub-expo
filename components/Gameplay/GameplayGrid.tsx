@@ -17,14 +17,14 @@ interface GameplayProps {
   itemsPerRow?: number;
 }
 
-const GameplayGrid: React.FC<GameplayProps> = ({
+function GameplayGrid({
   visible,
   hideModal,
   title,
   children,
   pages,
   itemsPerRow = 4,
-}) => {
+}: GameplayProps) {
   const renderPages = () => {
     if (!pages) return children;
 
@@ -83,7 +83,7 @@ const GameplayGrid: React.FC<GameplayProps> = ({
       </Modal>
     </Portal>
   );
-};
+}
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -128,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GameplayGrid;
+export { GameplayGrid };

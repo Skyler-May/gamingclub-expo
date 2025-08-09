@@ -7,7 +7,7 @@ import {
   TouchableOpacityProps,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import GameplayGrid from "./GameplayGrid";
+import { GameplayGrid } from "./GameplayGrid";
 
 // 使用从pageData导入的PageData接口
 
@@ -21,7 +21,7 @@ interface GameplayToggleProps {
   renderContent?: (currentPage: number | null) => React.ReactNode;
 }
 
-const GameplayToggle: React.FC<GameplayToggleProps> = ({
+function GameplayToggle({
   buttonTitle = "打开模态",
   modalTitle = "模态标题",
   pages = modalPages, // 默认使用导入的modalPages
@@ -29,7 +29,7 @@ const GameplayToggle: React.FC<GameplayToggleProps> = ({
   buttonProps,
   onPageSelect,
   renderContent,
-}) => {
+}: GameplayToggleProps) {
   const [visible, setVisible] = useState(false);
   const [currentPage, setCurrentPage] = useState<number | null>(null);
   const [currentButtonTitle, setCurrentButtonTitle] = useState(buttonTitle);
@@ -109,6 +109,6 @@ const GameplayToggle: React.FC<GameplayToggleProps> = ({
       {renderContent && currentPage !== null && renderContent(currentPage)}
     </>
   );
-};
+}
 
-export default GameplayToggle;
+export { GameplayToggle };
