@@ -2,7 +2,6 @@ import NumberAnimalSelector from "@/components/Buttons/NumberAnimalSelector";
 import Balance from "@/components/ui/Balance";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import SubmitButton from "../Buttons/SubmitButton";
 
 interface SubPageContentProps {
   currentPage: number | null;
@@ -23,7 +22,6 @@ const SubPageContent: React.FC<SubPageContentProps> = ({ currentPage }) => {
               console.log("选中的动物:", animals);
             }}
           />
-          <SubmitButton />
         </View>
       );
     case 2:

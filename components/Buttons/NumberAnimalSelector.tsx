@@ -16,6 +16,7 @@ import {
   selectedButtonStyle,
 } from "@/utils/buttonGroupStyles";
 import AnimalButtonsPanel from "./AnimalButtonsPanel";
+import SubmitButton from "./SubmitButton";
 
 interface NumberAnimalSelectorProps {
   // 组件必要属性
@@ -237,6 +238,7 @@ export default function NumberAnimalSelector({
         selectedButtonStyle={selectedButtonStyle}
         ButtonDefaultTextStyle={ButtonDefaultTextStyle}
       />
+      <SubmitButton />
     </View>
   );
 }
