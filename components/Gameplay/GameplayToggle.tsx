@@ -91,6 +91,7 @@ function GameplayToggle({
 
   return (
     <>
+      {/* 触发模态的按钮 */}
       <TouchableOpacity
         onPress={showModal}
         style={styles.button}
