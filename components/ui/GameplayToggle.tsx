@@ -1,7 +1,6 @@
 import { GamePlayData, gamePlayModes } from "@/types/game-play";
 import React, { useEffect, useState } from "react";
 import {
-  StyleSheet,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
@@ -52,20 +51,42 @@ function GameplayGrid({
     });
 
     return (
-      <View style={gridStyles.buttonContainer}>
+      <View style={{ width: "100%" }}>
         {rows.map((row, rowIndex) => (
-          <View key={`row-${rowIndex}`} style={gridStyles.buttonRow}>
+          <View
+            key={`row-${rowIndex}`}
+            style={{
+              flexDirection: "row",
+              flexWrap: "wrap",
+              justifyContent: "flex-start",
+              marginBottom: 10,
+            }}
+          >
             {row.map((button, buttonIndex) => (
               <View
                 key={`button-${button.id || rowIndex}-${buttonIndex}`}
-                style={gridStyles.buttonWrapper}
+                style={{ width: "25%", padding: 5 }}
               >
                 {button.title ? (
                   <TouchableOpacity
                     onPress={button.onPress}
-                    style={gridStyles.button}
+                    style={{
+                      backgroundColor: "#2196F3",
+                      padding: 10,
+                      borderRadius: 5,
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
                   >
-                    <Text style={gridStyles.buttonText}>{button.title}</Text>
+                    <Text
+                      style={{
+                        color: "white",
+                        fontSize: 14,
+                        textAlign: "center",
+                      }}
+                    >
+                      {button.title}
+                    </Text>
                   </TouchableOpacity>
                 ) : null}
               </View>
@@ -81,15 +102,27 @@ function GameplayGrid({
       <Modal
         visible={visible}
         onDismiss={hideModal}
-        contentContainerStyle={gridStyles.containerStyle}
+        contentContainerStyle={{
+          backgroundColor: "white",
+          padding: 20,
+          margin: 20,
+          borderRadius: 10,
+        }}
       >
-        {title && <Text style={gridStyles.title}>{title}</Text>}
+        {title && (
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: "bold",
+              marginBottom: 15,
+              textAlign: "center",
+            }}
+          >
+            {title}
+          </Text>
+        )}
         {renderPlays()}
-        <Button
-          mode="contained"
-          onPress={hideModal}
-          style={gridStyles.closeButton}
-        >
+        <Button mode="contained" onPress={hideModal} style={{ marginTop: 20 }}>
           关闭
         </Button>
       </Modal>
@@ -156,30 +189,29 @@ function GameplayToggle({
     onPress: () => handleGamePlaySelect(gamePlay.id),
   }));
 
-  const toggleStyles = StyleSheet.create({
-    button: {
-      borderWidth: 1,
-      borderColor: theme.colors.primary,
-      padding: 10,
-      borderRadius: 5,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    buttonText: {
-      color: theme.colors.primary,
-      fontSize: 14,
-      textAlign: "center",
-    },
-  });
-
   return (
     <>
       <TouchableOpacity
         onPress={showModal}
-        style={toggleStyles.button}
+        style={{
+          borderWidth: 1,
+          borderColor: theme.colors.primary,
+          padding: 10,
+          borderRadius: 5,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
         {...buttonProps}
       >
-        <Text style={toggleStyles.buttonText}>{currentButtonTitle}</Text>
+        <Text
+          style={{
+            color: theme.colors.primary,
+            fontSize: 14,
+            textAlign: "center",
+          }}
+        >
+          {currentButtonTitle}
+        </Text>
       </TouchableOpacity>
 
       <GameplayGrid
@@ -196,48 +228,5 @@ function GameplayToggle({
     </>
   );
 }
-
-const gridStyles = StyleSheet.create({
-  containerStyle: {
-    backgroundColor: "white",
-    padding: 20,
-    margin: 20,
-    borderRadius: 10,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  closeButton: {
-    marginTop: 20,
-  },
-  buttonContainer: {
-    width: "100%",
-  },
-  buttonRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "flex-start",
-    marginBottom: 10,
-  },
-  buttonWrapper: {
-    width: "25%",
-    padding: 5,
-  },
-  button: {
-    backgroundColor: "#2196F3",
-    padding: 10,
-    borderRadius: 5,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 14,
-    textAlign: "center",
-  },
-});
 
 export { GameplayToggle };

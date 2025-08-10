@@ -1,4 +1,5 @@
 import { Game } from "@/types/gamesData";
+import { navigateToGameRoute } from "@/utils/game-routes";
 import { Ionicons } from "@expo/vector-icons";
 import {
   Image,
@@ -11,7 +12,6 @@ import {
   ViewStyle,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import { navigateToGameRoute } from "../../utils/game-routes";
 
 interface GameCardProps {
   game: Game;
