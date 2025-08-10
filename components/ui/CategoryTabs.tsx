@@ -1,4 +1,4 @@
-import { GameCategoryTab } from "@/types/gamesData";
+import { GameCategoryTab } from "@/types/game-card";
 import { Ionicons } from "@expo/vector-icons";
 import {
   ScrollView,

@@ -1,4 +1,4 @@
-import { Game } from "@/types/gamesData";
+import { Game } from "@/types/game-card";
 import { navigateToGameRoute } from "@/utils/game-routes";
 import { Ionicons } from "@expo/vector-icons";
 import {
