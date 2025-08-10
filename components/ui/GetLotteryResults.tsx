@@ -1,5 +1,5 @@
 import { useLotteryResults } from "@/hooks/useMoLotteryResults";
-import { LotteryResultDisplayOptions } from "@/types/moApiTypes";
+import { LotteryResultDisplayOptions } from "@/types/mo-api";
 import React from "react";
 import {
   ActivityIndicator,

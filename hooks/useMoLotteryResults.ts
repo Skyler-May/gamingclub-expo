@@ -1,4 +1,4 @@
-import { LotteryResult } from "@/types/moApiTypes";
+import { LotteryResult } from "@/types/mo-api";
 import { useCallback, useEffect, useState } from "react";
 
 export function useLotteryResults(apiUrl: string) {
