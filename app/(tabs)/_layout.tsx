@@ -171,7 +171,7 @@ export default function DrawerLayout() {
         }}
       >
         <Drawer.Screen
-          name="tabs"
+          name="(tabs)"
           component={TabsLayout}
           options={{
             drawerLabel: () => null,
