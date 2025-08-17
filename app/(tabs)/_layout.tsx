@@ -1,7 +1,9 @@
 import { Ionicons } from "@expo/vector-icons";
-import { createDrawerNavigator } from "@react-navigation/drawer";
-import { DrawerActions } from "@react-navigation/native";
-import { Link, Tabs, useNavigation } from "expo-router";
+import {
+  createDrawerNavigator,
+  DrawerToggleButton,
+} from "@react-navigation/drawer";
+import { Link, Tabs } from "expo-router";
 import { Pressable, TouchableOpacity } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "react-native-paper";
@@ -26,7 +28,6 @@ function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
 
 function TabsLayout() {
   const theme = useTheme();
-  const navigation = useNavigation();
 
   return (
     <Tabs
@@ -40,15 +41,7 @@ function TabsLayout() {
         tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
         headerTintColor: theme.colors.onSurface,
         headerLeft: () => (
-          <Pressable
-            onPress={() => {
-              // 打开 drawer
-              navigation.dispatch(DrawerActions.openDrawer());
-            }}
-            style={{ paddingLeft: 20 }}
-          >
-            <Ionicons name="menu" size={24} color={theme.colors.onSurface} />
-          </Pressable>
+          <DrawerToggleButton tintColor={theme.colors.onSurface} />
         ),
       }}
     >
