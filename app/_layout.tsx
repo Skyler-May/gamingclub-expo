@@ -102,7 +102,7 @@ function RootLayoutNav({
         options={{ title: "模态（测试）", presentation: "modal" }}
       />
       <Stack.Screen
-        name="hong-kong"
+        name="hongkong"
         options={{
           title: "香港",
           headerRight: () => (
@@ -150,7 +150,7 @@ function RootLayoutNav({
         }}
       />
       <Stack.Screen
-        name="tai-wan"
+        name="taiwan"
         options={{
           title: "台湾",
           headerRight: () => (
