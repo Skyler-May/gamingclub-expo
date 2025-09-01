@@ -1,5 +1,5 @@
 import ThemeToggle from "@/components/ThemeToggle";
-import { getTheme } from "@/utils/themed";
+import { getTheme } from "@/utils/Themed";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";

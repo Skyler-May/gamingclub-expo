@@ -1,5 +1,5 @@
 import ThemeToggle from "@/components/ThemeToggle";
-import { getTheme } from "@/utils/themed";
+import { getTheme } from "@/utils/Themed";
 import { useState } from "react";
 import { Text, View } from "react-native";
 import { PaperProvider } from "react-native-paper";

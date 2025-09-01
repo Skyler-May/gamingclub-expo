@@ -1,21 +1,4 @@
-import {
-  darkBlueColors,
-  darkCyanColors,
-  darkGreenColors,
-  darkOrangeColors,
-  darkPinkColors,
-  darkRedColors,
-  darkYellowColors,
-  defaultDarkColors,
-  defaultLightColors,
-  lightBlueColors,
-  lightCyanColors,
-  lightGreenColors,
-  lightOrangeColors,
-  lightPinkColors,
-  lightRedColors,
-  lightYellowColors,
-} from "@/constants/colors";
+import { darkBlueColors, darkCyanColors, darkGreenColors, darkOrangeColors, darkPinkColors, darkRedColors, darkYellowColors, defaultDarkColors, defaultLightColors, lightBlueColors, lightCyanColors, lightGreenColors, lightOrangeColors, lightPinkColors, lightRedColors, lightYellowColors } from "@/constants/Colors";
 import { MD3DarkTheme, MD3LightTheme } from "react-native-paper";
 
 export const getTheme = (isDarkMode: boolean, currentTheme: string) => {
