@@ -1,4 +1,5 @@
 import ThemeToggle from "@/components/ThemeToggle";
+import { useAuthStore } from "@/utils/authStore";
 import { getTheme } from "@/utils/Themed";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { useFonts } from "expo-font";
@@ -81,7 +82,9 @@ function RootLayoutNav({
   currentTheme,
   setCurrentTheme,
 }: RootLayoutNavProps) {
+  const { isLoggedIn, shouldCreateAccount } = useAuthStore();
   const theme = useTheme();
+
   return (
     <Stack
       screenOptions={{
@@ -89,34 +92,48 @@ function RootLayoutNav({
         headerTintColor: theme.colors.onSurface,
       }}
     >
-      <Stack.Screen
-        name="(tabs)"
-        options={{
-          title: "首页",
-          headerShown: false,
-        }}
-      />
-      <Stack.Screen
-        name="modal"
-        options={{ title: "模态（测试）", presentation: "modal" }}
-      />
+      {/* ------------------- 受保护的主页面 ------------------- */}
+      <Stack.Protected guard={isLoggedIn}>
+        {/* 顶层 Tabs，只声明一次，不重复嵌套 */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
 
-      <Stack.Screen
-        name="settings"
-        options={{
-          title: "设置",
-          headerRight: () => (
-            <View>
-              <ThemeToggle
-                isDarkMode={isDarkMode}
-                setIsDarkMode={setIsDarkMode}
-                currentTheme={currentTheme}
-                setCurrentTheme={setCurrentTheme}
-              />
-            </View>
-          ),
-        }}
-      />
+        {/* 独立页面，可深层访问 */}
+        <Stack.Screen
+          name="settings/index"
+          options={{
+            title: "设置",
+            headerRight: () => (
+              <View>
+                <ThemeToggle
+                  isDarkMode={isDarkMode}
+                  setIsDarkMode={setIsDarkMode}
+                  currentTheme={currentTheme}
+                  setCurrentTheme={setCurrentTheme}
+                />
+              </View>
+            ),
+          }}
+        />
+        <Stack.Screen
+          name="modal"
+          options={{ title: "模态（测试）", presentation: "modal" }}
+        />
+        <Stack.Screen name="fuli/index" />
+        <Stack.Screen name="lottery/hong-kong/index" />
+        <Stack.Screen name="lottery/macau/index" />
+        <Stack.Screen name="chat/index" />
+      </Stack.Protected>
+
+      {/* ------------------- 登录 & 创建账号 ------------------- */}
+      <Stack.Protected guard={!isLoggedIn}>
+        <Stack.Screen name="sign-in" options={{ headerShown: false }} />
+        <Stack.Protected guard={shouldCreateAccount}>
+          <Stack.Screen
+            name="create-account"
+            options={{ headerShown: false }}
+          />
+        </Stack.Protected>
+      </Stack.Protected>
     </Stack>
   );
 }

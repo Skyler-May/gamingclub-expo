@@ -1,11 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
-import {
-  createDrawerNavigator,
-  DrawerToggleButton,
-} from "@react-navigation/drawer";
 import { Link, Tabs } from "expo-router";
 import { Pressable, TouchableOpacity } from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { useTheme } from "react-native-paper";
 
 type TabBarIconProps = {
@@ -14,7 +9,6 @@ type TabBarIconProps = {
   size?: number;
 };
 
-const Drawer = createDrawerNavigator();
 function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
   return (
     <Ionicons
@@ -26,7 +20,7 @@ function TabBarIcon({ name, color = "black", size = 24 }: TabBarIconProps) {
   );
 }
 
-function TabsLayout() {
+export default function TabsLayout() {
   const theme = useTheme();
 
   return (
@@ -40,9 +34,6 @@ function TabsLayout() {
         tabBarActiveTintColor: theme.colors.primary,
         tabBarInactiveTintColor: theme.colors.onSurfaceVariant,
         headerTintColor: theme.colors.onSurface,
-        headerLeft: () => (
-          <DrawerToggleButton tintColor={theme.colors.onSurface} />
-        ),
       }}
     >
       <Tabs.Screen
@@ -144,35 +135,5 @@ function TabsLayout() {
         }}
       />
     </Tabs>
-  );
-}
-
-export default function DrawerLayout() {
-  const theme = useTheme();
-
-  return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer.Navigator
-        screenOptions={{
-          drawerStyle: {
-            backgroundColor: theme.colors.elevation.level3,
-            // width: 240,
-          },
-          drawerActiveTintColor: theme.colors.primary,
-          drawerInactiveTintColor: theme.colors.onSurfaceVariant,
-          headerShown: false,
-        }}
-      >
-        <Drawer.Screen
-          name="(tabs)"
-          component={TabsLayout}
-          options={{
-            drawerLabel: () => null,
-            drawerItemStyle: { height: 0 },
-          }}
-        />
-        {/* 可添加更多 Drawer 页面 */}
-      </Drawer.Navigator>
-    </GestureHandlerRootView>
   );
 }

@@ -6,7 +6,7 @@ import {
   deleteSecureItem,
   getSecureItem,
   setSecureItem,
-} from "@/utils/storage";
+} from "@/utils/authStore";
 import axios from "axios";
 
 const instance = axios.create({

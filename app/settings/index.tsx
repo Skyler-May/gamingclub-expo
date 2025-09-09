@@ -1,8 +1,15 @@
+import { useAuthStore } from "@/utils/authStore";
 import { Ionicons } from "@expo/vector-icons";
-import { Link, Stack } from "expo-router";
-import { StyleSheet, Text, View } from "react-native";
+import { Link, router, Stack } from "expo-router";
+import { Button, StyleSheet, Text, View } from "react-native";
 
 export default function Settings() {
+  const { logOut } = useAuthStore();
+  const handleLogOut = () => {
+    logOut();
+    router.replace("/sign-in");
+  };
+
   return (
     <>
       <Stack.Screen
@@ -41,6 +48,7 @@ export default function Settings() {
             <Ionicons name="chevron-forward" size={24} cocolor="" />
           </View>
         </Link>
+        <Button title="退出" onPress={handleLogOut} />
       </View>
     </>
   );
